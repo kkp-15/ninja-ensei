@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>プロ野球 遠征費計算ツール【2026年版】12球場の交通費・ホテル代の目安を3秒で</title>
+<meta name="description" content="プロ野球の遠征費はいくら？出発地と球場を選ぶだけで、新幹線・飛行機・夜行バスの交通費＋ホテル代の目安を無料で計算。東京ドーム・甲子園・エスコンなど12球場すべて対応。球場別の早見表と節約のコツも。">
+<link rel="canonical" href="https://kkpwebninja.com/enseihi/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="プロ野球 遠征費計算ツール｜12球場の交通費・ホテル代の目安">
+<meta property="og:description" content="出発地と球場を選ぶだけ。新幹線・飛行機・バス＋ホテル代の遠征費を3秒で概算。無料・登録不要。">
+<meta property="og:url" content="https://kkpwebninja.com/enseihi/">
+<meta property="og:site_name" content="kkpwebninja.com">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@kkp_webninja">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "プロ野球 遠征費計算ツール", "url": "https://kkpwebninja.com/enseihi/", "applicationCategory": "TravelApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"}, "description": "出発地と球場を選ぶだけで、新幹線・飛行機・夜行バスの交通費とホテル代の目安を計算。プロ野球12球場すべてに対応。", "author": {"@type": "Person", "name": "KKP", "url": "https://kkpwebninja.com/"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "プロ野球の遠征費は1回いくらかかる？", "acceptedAnswer": {"@type": "Answer", "text": "1泊2日・1人の場合、隣接エリア（例：大阪→名古屋）なら約2万円、東京⇔福岡・札幌のような長距離だと4〜6万円が目安です。チケット代（3,000〜8,000円）と飲食代は別途かかります。"}}, {"@type": "Question", "name": "日帰りで遠征できる球場は？", "acceptedAnswer": {"@type": "Answer", "text": "東京から名古屋・仙台、大阪から名古屋・広島など、新幹線で2時間以内の区間はデーゲームなら日帰り可能です。ナイターは終了が21時半前後なので、最終便に間に合うか事前に確認しましょう。"}}, {"@type": "Question", "name": "遠征のホテルはいつ予約すべき？", "acceptedAnswer": {"@type": "Answer", "text": "チケットが確定したらすぐが基本です。特に交流戦・週末・連休・優勝争いの時期は球場周辺から埋まります。キャンセル無料プランで先に押さえておくのが安全です。"}}, {"@type": "Question", "name": "このツールの金額はどこまで正確？", "acceptedAnswer": {"@type": "Answer", "text": "新幹線はJR各社の通常期指定席の定価、飛行機・バスは一般的な価格帯の中間値、ホテルは2025〜26年の各都市の実勢価格をもとにしています。時期や予約タイミングで上下するため「だいたいの予算感」としてご利用ください。"}}, {"@type": "Question", "name": "この遠征費計算ツールは無料？", "acceptedAnswer": {"@type": "Answer", "text": "無料・登録不要でお使いいただけます。プロ野球12球場すべてに対応しています。"}}]}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "kkpwebninja", "item": "https://kkpwebninja.com/"}, {"@type": "ListItem", "position": 2, "name": "プロ野球 遠征費計算ツール", "item": "https://kkpwebninja.com/enseihi/"}]}]</script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --orange:#FF6B00;--orange2:#FF8C00;--orange-light:#FFF3E8;
+  --dark:#111827;--gray:#6B7280;--border:#E5E7EB;--card:#FFFFFF;
+  --green:#16A34A;--blue:#2563EB;--red:#EF4444;
+}
+body{font-family:'Noto Sans JP',sans-serif;background:#F3F4F6;color:var(--dark);min-height:100vh;}
+.hidden{display:none!important;}
+
+.hero{background:linear-gradient(135deg,var(--orange),var(--orange2));padding:28px 20px 24px;text-align:center;color:white;}
+.hero h1{font-size:21px;font-weight:900;line-height:1.35;}
+.hero p{font-size:12px;opacity:.9;margin-top:6px;}
+.wrap{max-width:520px;margin:0 auto;padding:16px;}
+
+.card{background:var(--card);border-radius:16px;padding:18px 16px;box-shadow:0 2px 12px rgba(0,0,0,.07);margin-bottom:12px;}
+.card-label{font-size:13px;font-weight:800;margin-bottom:10px;display:flex;align-items:center;gap:6px;}
+.step{background:var(--orange);color:white;font-size:10px;font-weight:900;padding:2px 7px;border-radius:20px;}
+
+.sel{width:100%;border:2px solid var(--border);border-radius:12px;padding:12px;font-size:15px;font-weight:700;font-family:inherit;background:white;color:var(--dark);outline:none;appearance:none;-webkit-appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23FF6B00' stroke-width='2' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;}
+.sel:focus{border-color:var(--orange);}
+
+.chip-row{display:flex;flex-wrap:wrap;gap:6px;}
+.chip{border:2px solid var(--border);border-radius:20px;padding:7px 13px;font-size:12px;font-weight:700;cursor:pointer;background:white;color:var(--gray);transition:.15s;font-family:inherit;}
+.chip.active{border-color:var(--orange);background:var(--orange-light);color:var(--orange);}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+
+.calc-btn{width:100%;border:none;border-radius:14px;padding:16px;font-size:16px;font-weight:900;font-family:inherit;cursor:pointer;background:linear-gradient(135deg,var(--orange),var(--orange2));color:white;box-shadow:0 6px 20px rgba(255,107,0,.4);transition:.2s;margin-top:4px;}
+.calc-btn:active{transform:scale(.97);}
+
+/* result */
+.result-hero{background:var(--dark);border-radius:20px;padding:22px 18px;color:white;margin-bottom:12px;position:relative;overflow:hidden;}
+.result-hero::before{content:'';position:absolute;right:-30px;top:-30px;width:140px;height:140px;border-radius:50%;background:rgba(255,107,0,.25);}
+.route{font-size:12px;opacity:.8;font-weight:700;position:relative;}
+.total-label{font-size:11px;opacity:.7;margin-top:10px;position:relative;}
+.total{font-size:38px;font-weight:900;color:#FFB86B;line-height:1.1;position:relative;}
+.total small{font-size:16px;margin-left:2px;}
+.per{font-size:12px;opacity:.8;margin-top:4px;position:relative;}
+
+.pr-notice{max-width:520px;margin:0 auto;padding:6px 16px 0;font-size:10px;color:var(--gray);text-align:center;}
+.pr-badge{display:inline-block;font-size:9px;font-weight:900;padding:1px 5px;border-radius:4px;background:rgba(255,255,255,.25);margin-right:6px;vertical-align:1px;letter-spacing:.5px;}
+.bd-link .pr-badge{background:#EDE9FE;color:#7B3FBE;}
+.hero-cta{display:block;margin-top:14px;background:#7B3FBE;color:white;text-decoration:none;font-weight:900;font-size:13px;padding:11px 14px;border-radius:12px;text-align:center;position:relative;box-shadow:0 4px 12px rgba(123,63,190,.4);}
+.hero-cta:active{transform:scale(.97);}
+.bd-link{display:inline-block;font-size:11px;color:#7B3FBE;font-weight:800;text-decoration:underline;margin-top:4px;}
+.breakdown{background:var(--card);border-radius:16px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,.07);margin-bottom:12px;}
+.bd-title{font-size:13px;font-weight:800;margin-bottom:10px;}
+.bd-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px dashed var(--border);font-size:13px;}
+.bd-row:last-child{border-bottom:none;}
+.bd-name{font-weight:700;}
+.bd-sub{font-size:10px;color:var(--gray);margin-top:2px;}
+.bd-val{font-weight:900;font-size:14px;}
+
+.trans-table{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px;}
+.trans-card{border:2px solid var(--border);border-radius:12px;padding:10px 8px;text-align:center;cursor:pointer;transition:.15s;}
+.trans-card.active{border-color:var(--orange);background:var(--orange-light);}
+.trans-card.na{opacity:.4;cursor:not-allowed;}
+.trans-icon{font-size:20px;}
+.trans-name{font-size:11px;font-weight:800;margin-top:2px;}
+.trans-price{font-size:12px;font-weight:900;color:var(--orange);margin-top:3px;}
+.trans-time{font-size:9px;color:var(--gray);}
+
+/* affiliate */
+.aff{background:var(--card);border-radius:20px;padding:20px 16px;box-shadow:0 4px 20px rgba(0,0,0,.1);margin-bottom:12px;border:2px solid var(--orange-light);}
+.aff-head{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.aff-badge{background:var(--orange);color:white;font-size:9px;font-weight:900;padding:3px 8px;border-radius:20px;}
+.aff-title{font-size:15px;font-weight:900;}
+.aff-desc{font-size:12px;color:var(--gray);line-height:1.6;margin-bottom:12px;}
+.aff-btn{display:flex;align-items:center;justify-content:space-between;background:linear-gradient(135deg,#5C2D91,#7B3FBE);color:white;border-radius:14px;padding:14px 16px;text-decoration:none;font-weight:900;font-size:14px;box-shadow:0 4px 14px rgba(92,45,145,.35);transition:.2s;}
+.aff-btn:active{transform:scale(.97);}
+.aff-btn small{display:block;font-size:10px;font-weight:700;opacity:.85;margin-top:2px;}
+.aff-note{font-size:9px;color:var(--gray);text-align:center;margin-top:10px;line-height:1.6;}
+
+.notice{background:#FFFBEB;border-left:4px solid #F59E0B;border-radius:10px;padding:12px 14px;font-size:11px;line-height:1.7;color:#92400E;margin-bottom:12px;}
+.retry{width:100%;border:2px solid var(--orange);border-radius:14px;padding:13px;font-size:14px;font-weight:800;font-family:inherit;cursor:pointer;background:white;color:var(--orange);margin-bottom:10px;}
+.share{width:100%;border:none;border-radius:14px;padding:13px;font-size:14px;font-weight:800;font-family:inherit;cursor:pointer;background:var(--dark);color:white;}
+
+/* SEO content */
+.seo{padding-top:8px;}
+.seo h2{font-size:16px;font-weight:900;margin:26px 0 10px;padding-left:10px;border-left:4px solid var(--orange);}
+.seo p{font-size:13px;line-height:1.8;color:#374151;}
+.tbl-wrap{overflow-x:auto;background:var(--card);border-radius:12px;box-shadow:0 2px 10px rgba(0,0,0,.06);}
+.seo-tbl{border-collapse:collapse;font-size:11px;white-space:nowrap;min-width:100%;}
+.seo-tbl th,.seo-tbl td{padding:8px 9px;border-bottom:1px solid var(--border);text-align:right;}
+.seo-tbl thead th{background:var(--orange-light);color:var(--orange);font-weight:900;text-align:center;position:sticky;top:0;}
+.seo-tbl tbody th{text-align:left;font-weight:800;background:#FAFAFA;position:sticky;left:0;line-height:1.3;}
+.seo-tbl tbody th small{font-weight:700;color:var(--gray);font-size:9px;}
+.seo-tbl td small{color:var(--blue);font-size:9px;margin-left:2px;}
+.tbl-note{font-size:10px!important;color:var(--gray)!important;margin-top:6px;}
+.seo-list{font-size:13px;line-height:1.8;color:#374151;padding-left:20px;}
+.seo-list li{margin-bottom:6px;}
+.seo-list a{color:var(--orange);font-weight:700;}
+.faq dt{font-size:13px;font-weight:900;margin-top:12px;padding-left:22px;position:relative;}
+.faq dt::before{content:'Q';position:absolute;left:0;color:var(--orange);font-weight:900;}
+.faq dd{font-size:12.5px;line-height:1.8;color:#374151;padding-left:22px;margin-top:4px;}
+.footer{text-align:center;font-size:10px;color:var(--gray);padding:20px 0 30px;line-height:1.8;}
+.footer a{color:var(--orange);text-decoration:none;font-weight:700;}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>⚾ プロ野球 遠征費計算ツール<br><span style="font-size:13px;font-weight:700;opacity:.9">12球場の交通費・ホテル代はいくら？</span></h1>
+  <p>出発地と球場を選ぶだけ。交通費＋ホテル代の目安を3秒で概算</p>
+</div>
+<div class="pr-notice">本ページにはプロモーション（Agodaのアフィリエイト広告）が含まれます。</div>
+
+<!-- ===== INPUT ===== -->
+<div class="wrap" id="page-input">
+
+  <div class="card">
+    <div class="card-label"><span class="step">1</span>出発地</div>
+    <select class="sel" id="from"></select>
+  </div>
+
+  <div class="card">
+    <div class="card-label"><span class="step">2</span>行きたい球場</div>
+    <select class="sel" id="to"></select>
+  </div>
+
+  <div class="card">
+    <div class="card-label"><span class="step">3</span>移動手段</div>
+    <div class="chip-row" id="trans-chips">
+      <button class="chip active" data-v="shinkansen">🚄 新幹線</button>
+      <button class="chip" data-v="plane">✈️ 飛行機</button>
+      <button class="chip" data-v="bus">🚌 夜行バス</button>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-label"><span class="step">4</span>泊数</div>
+      <div class="chip-row" id="nights-chips">
+        <button class="chip" data-v="0">日帰り</button>
+        <button class="chip active" data-v="1">1泊</button>
+        <button class="chip" data-v="2">2泊</button>
+        <button class="chip" data-v="3">3泊</button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-label"><span class="step">5</span>人数</div>
+      <div class="chip-row" id="people-chips">
+        <button class="chip active" data-v="1">1人</button>
+        <button class="chip" data-v="2">2人</button>
+        <button class="chip" data-v="3">3人</button>
+        <button class="chip" data-v="4">4人</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-label"><span class="step">6</span>ホテルのグレード</div>
+    <div class="chip-row" id="hotel-chips">
+      <button class="chip" data-v="cheap">💤 カプセル・格安</button>
+      <button class="chip active" data-v="biz">🏨 ビジネスホテル</button>
+      <button class="chip" data-v="mid">✨ ちょっと贅沢</button>
+    </div>
+  </div>
+
+  <button class="calc-btn" onclick="calc()">💰 遠征費を計算する</button>
+  <p style="font-size:10px;color:var(--gray);text-align:center;margin-top:10px;line-height:1.6;">※チケット代・飲食・グッズ代は含みません。あくまで「移動＋宿泊」の目安です。</p>
+</div>
+
+<!-- ===== RESULT ===== -->
+<div class="wrap hidden" id="page-result">
+
+  <div class="result-hero">
+    <div class="route" id="r-route">東京 → 甲子園</div>
+    <div class="total-label" id="r-cond">1泊2日・1人・新幹線</div>
+    <div class="total"><span id="r-total">0</span><small>円</small></div>
+    <div class="per" id="r-per">1人あたり 約0円</div>
+    <a class="hero-cta" id="hero-cta" href="#" target="_blank" rel="noopener sponsored"><span class="pr-badge">PR</span>🏨 <span id="hero-cta-city">大阪</span>のホテルの実際の価格を見る ›</a>
+  </div>
+
+  <div class="breakdown">
+    <div class="bd-title">📊 内訳（目安）</div>
+    <div class="bd-row">
+      <div><div class="bd-name">🚄 交通費（往復）</div><div class="bd-sub" id="r-trans-sub"></div></div>
+      <div class="bd-val" id="r-trans"></div>
+    </div>
+    <div class="bd-row">
+      <div><div class="bd-name">🏨 ホテル代</div><div class="bd-sub" id="r-hotel-sub"></div><a class="bd-link" id="bd-link" href="#" target="_blank" rel="noopener sponsored"><span class="pr-badge">PR</span>Agodaで空室と価格を確認 →</a></div>
+      <div class="bd-val" id="r-hotel"></div>
+    </div>
+    <div class="bd-row">
+      <div><div class="bd-name">🚉 球場までの現地移動</div><div class="bd-sub" id="r-local-sub"></div></div>
+      <div class="bd-val" id="r-local"></div>
+    </div>
+  </div>
+
+  <!-- ===== Agoda CTA ===== -->
+  <div class="aff" id="aff-box">
+    <div class="aff-head">
+      <span class="aff-badge">PR</span>
+      <span class="aff-title">実際のホテル料金を調べてみる</span>
+    </div>
+    <div class="aff-desc" id="aff-desc">目安がわかったら、実際の空室と価格をチェック。試合開催日は球場周辺から埋まっていくので早めの確認がおすすめです。</div>
+    <a class="aff-btn" id="aff-link" href="#" target="_blank" rel="noopener sponsored">
+      <span>🏨 <span id="aff-city">東京</span>のホテルをAgodaで探す<small>ラッキー割引・ポイント還元あり</small></span>
+      <span style="font-size:20px;">›</span>
+    </a>
+    <div class="aff-note">※上記はAgodaのアフィリエイト広告です。リンク経由で予約されると当サイトに報酬が入りますが、価格が上がることはありません。</div>
+  </div>
+
+  <div class="breakdown">
+    <div class="bd-title">🔄 移動手段を比べる（片道・1人）</div>
+    <div class="trans-table" id="trans-compare"></div>
+  </div>
+
+  <div class="notice">
+    <b>⚠️ 金額はあくまで目安です</b><br>
+    <b>新幹線</b>＝通常期・普通車指定席の定価（JR各社の発売額を参照。閑散期−200円／繁忙期+200〜400円、早割・EX予約でさらに安くなります）<br>
+    <b>飛行機</b>＝LCC平日〜大手週末の一般的な価格帯。表示レンジの中間値で合計を計算。セール時は数千円、繁忙期・直前は2〜4倍になることも<br>
+    <b>ホテル</b>＝2025〜26年の各都市ビジネスホテル実勢価格。試合日・連休は上振れします<br>
+    実際の料金は必ず各公式サイト・予約サイトでご確認ください。
+  </div>
+
+  <button class="retry" onclick="back()">🔄 条件を変えて再計算</button>
+  <button class="share" onclick="share()">𝕏 結果をシェア</button>
+</div>
+
+
+<!-- ===== SEO用 静的コンテンツ ===== -->
+<article class="wrap seo">
+  <h2>プロ野球12球場 遠征費の目安早見表【2026年版】</h2>
+  <p>主要7都市から各球場へ「1泊2日・1人・新幹線（または飛行機）」で遠征した場合の交通費＋ホテル代の合計目安です。チケット代・飲食代は含みません。詳しい条件は上のツールで自由に変えて計算できます。</p>
+  <div class="tbl-wrap"><table class="seo-tbl">
+<thead><tr><th>球場</th><th>東京発</th><th>名古屋発</th><th>大阪発</th><th>広島発</th><th>福岡発</th><th>仙台発</th><th>札幌発</th></tr></thead>
+<tbody>
+<tr><th>エスコンフィールド<br><small>日本ハム</small></th><td>71,740円<small></small></td><td>36,900円<small>✈</small></td><td>39,900円<small>✈</small></td><td>61,900円<small>✈</small></td><td>46,900円<small>✈</small></td><td>65,900円<small></small></td><td>11,900円<small></small></td></tr>
+<tr><th>楽天モバイルパーク<br><small>楽天</small></th><td>32,560円<small></small></td><td>54,900円<small></small></td><td>54,940円<small></small></td><td>71,300円<small></small></td><td>79,300円<small></small></td><td>9,300円<small></small></td><td>63,300円<small></small></td></tr>
+<tr><th>ベルーナドーム<br><small>西武</small></th><td>14,400円<small></small></td><td>35,200円<small></small></td><td>42,040円<small></small></td><td>52,120円<small></small></td><td>60,220円<small></small></td><td>36,060円<small></small></td><td>72,640円<small></small></td></tr>
+<tr><th>ZOZOマリン<br><small>ロッテ</small></th><td>14,200円<small></small></td><td>35,000円<small></small></td><td>41,840円<small></small></td><td>51,920円<small></small></td><td>60,020円<small></small></td><td>35,860円<small></small></td><td>72,440円<small></small></td></tr>
+<tr><th>神宮球場<br><small>ヤクルト</small></th><td>14,800円<small></small></td><td>37,200円<small></small></td><td>44,040円<small></small></td><td>54,120円<small></small></td><td>62,220円<small></small></td><td>38,060円<small></small></td><td>74,640円<small></small></td></tr>
+<tr><th>東京ドーム<br><small>巨人</small></th><td>14,800円<small></small></td><td>37,200円<small></small></td><td>44,040円<small></small></td><td>54,120円<small></small></td><td>62,220円<small></small></td><td>38,060円<small></small></td><td>74,640円<small></small></td></tr>
+<tr><th>横浜スタジアム<br><small>DeNA</small></th><td>14,400円<small></small></td><td>35,200円<small></small></td><td>42,040円<small></small></td><td>52,120円<small></small></td><td>60,220円<small></small></td><td>36,060円<small></small></td><td>72,640円<small></small></td></tr>
+<tr><th>バンテリンドーム<br><small>中日</small></th><td>32,900円<small></small></td><td>10,500円<small></small></td><td>23,660円<small></small></td><td>39,920円<small></small></td><td>48,920円<small></small></td><td>56,100円<small></small></td><td>35,500円<small>✈</small></td></tr>
+<tr><th>甲子園<br><small>阪神</small></th><td>42,440円<small></small></td><td>26,360円<small></small></td><td>13,200円<small></small></td><td>34,900円<small></small></td><td>45,040円<small></small></td><td>58,840円<small></small></td><td>41,200円<small>✈</small></td></tr>
+<tr><th>京セラドーム<br><small>オリックス</small></th><td>42,040円<small></small></td><td>25,960円<small></small></td><td>12,800円<small></small></td><td>34,500円<small></small></td><td>44,640円<small></small></td><td>58,440円<small></small></td><td>40,800円<small>✈</small></td></tr>
+<tr><th>マツダスタジアム<br><small>広島</small></th><td>47,820円<small></small></td><td>37,920円<small></small></td><td>30,200円<small></small></td><td>8,500円<small></small></td><td>27,560円<small></small></td><td>70,500円<small></small></td><td>58,500円<small>✈</small></td></tr>
+<tr><th>PayPayドーム<br><small>ソフトバンク</small></th><td>58,420円<small></small></td><td>49,420円<small></small></td><td>42,840円<small></small></td><td>30,060円<small></small></td><td>11,000円<small></small></td><td>81,000円<small></small></td><td>46,000円<small>✈</small></td></tr>
+</tbody></table></div>
+<p class="tbl-note">往復交通費（新幹線は通常期指定席の定価、✈は飛行機の相場中間値）＋ビジネスホテル1泊＋球場までの現地移動の合計。1人あたりの目安。同一都市内は現地移動のみ。</p>
+
+  <h2>球場別アクセスとおすすめ宿泊エリア</h2>
+  <ul class="seo-list">
+<li><b>エスコンフィールド（日本ハム）</b>：札幌駅→北広島駅→シャトル。宿泊は札幌エリアが便利（ビジホ相場 約9,500円/泊）</li>
+<li><b>楽天モバイルパーク（楽天）</b>：仙台駅→宮城野原駅。宿泊は仙台エリアが便利（ビジホ相場 約8,500円/泊）</li>
+<li><b>ベルーナドーム（西武）</b>：池袋→西武球場前。宿泊は埼玉エリアが便利（ビジホ相場 約11,000円/泊）</li>
+<li><b>ZOZOマリン（ロッテ）</b>：海浜幕張駅→バス。宿泊は千葉エリアが便利（ビジホ相場 約11,000円/泊）</li>
+<li><b>神宮球場（ヤクルト）</b>：新宿→外苑前。宿泊は東京エリアが便利（ビジホ相場 約14,000円/泊）</li>
+<li><b>東京ドーム（巨人）</b>：東京駅→水道橋。宿泊は東京エリアが便利（ビジホ相場 約14,000円/泊）</li>
+<li><b>横浜スタジアム（DeNA）</b>：横浜駅→関内。宿泊は横浜エリアが便利（ビジホ相場 約12,000円/泊）</li>
+<li><b>バンテリンドーム（中日）</b>：名古屋駅→ナゴヤドーム前矢田。宿泊は名古屋エリアが便利（ビジホ相場 約9,500円/泊）</li>
+<li><b>甲子園（阪神）</b>：梅田→甲子園（阪神電車）。宿泊は大阪エリアが便利（ビジホ相場 約12,000円/泊）</li>
+<li><b>京セラドーム（オリックス）</b>：難波→ドーム前。宿泊は大阪エリアが便利（ビジホ相場 約12,000円/泊）</li>
+<li><b>マツダスタジアム（広島）</b>：広島駅から徒歩10分。宿泊は広島エリアが便利（ビジホ相場 約8,500円/泊）</li>
+<li><b>PayPayドーム（ソフトバンク）</b>：博多→唐人町。宿泊は福岡エリアが便利（ビジホ相場 約10,000円/泊）</li>
+  </ul>
+
+  <h2>プロ野球の遠征費を安くする5つのコツ</h2>
+  <ol class="seo-list">
+    <li><b>新幹線は早割・EX予約を使う</b>：定価から数千円安くなる区間が多く、21日前予約なら大幅割引もあります。</li>
+    <li><b>飛行機はLCCのセールを狙う</b>：東京⇔福岡・札幌はLCCなら片道1万円前後、セール時は数千円まで下がります。</li>
+    <li><b>ホテルは球場最寄りより1〜2駅離す</b>：試合日は球場周辺から値上がり・満室になります。地下鉄で10分離れるだけで数千円変わることも。</li>
+    <li><b>2人以上ならツインで割り勘</b>：1人あたりの宿泊費は7割程度に抑えられます。</li>
+    <li><b>交通＋宿泊のパックも比較する</b>：JR・航空会社のダイナミックパッケージは単品合計より安いケースがあります。</li>
+  </ol>
+
+  <h2>よくある質問</h2>
+  <dl class="faq">
+    <dt>プロ野球の遠征費は1回いくらかかる？</dt>
+    <dd>1泊2日・1人の場合、隣接エリア（例：大阪→名古屋）なら約2万円、東京⇔福岡・札幌のような長距離だと4〜6万円が目安です。チケット代（3,000〜8,000円）と飲食代は別途かかります。</dd>
+    <dt>日帰りで遠征できる球場は？</dt>
+    <dd>東京から名古屋・仙台、大阪から名古屋・広島など、新幹線で2時間以内の区間はデーゲームなら日帰り可能です。ナイターは終了が21時半前後なので、最終便に間に合うか事前に確認しましょう。</dd>
+    <dt>遠征のホテルはいつ予約すべき？</dt>
+    <dd>チケットが確定したらすぐが基本です。特に交流戦・週末・連休・優勝争いの時期は球場周辺から埋まります。キャンセル無料プランで先に押さえておくのが安全です。</dd>
+    <dt>このツールの金額はどこまで正確？</dt>
+    <dd>新幹線はJR各社の通常期指定席の定価、飛行機・バスは一般的な価格帯の中間値、ホテルは2025〜26年の各都市の実勢価格をもとにしています。時期や予約タイミングで上下するため「だいたいの予算感」としてご利用ください。</dd>
+    <dt>この遠征費計算ツールは無料？</dt>
+    <dd>無料・登録不要でお使いいただけます。プロ野球12球場すべてに対応しています。</dd>
+  </dl>
+
+  <h2>関連ツール</h2>
+  <ul class="seo-list">
+    <li><a href="./ensei.html">遠征費計算ツール（ライブ・サッカー・都市対応の総合版）</a></li>
+    <li><a href="https://npb-magic.kkpwebninja.com/">プロ野球マジック点灯計算</a> — 優勝マジックの計算と試合日程チェック</li>
+    <li><a href="https://kkpwebninja.com/">kkpwebninja.com</a> — 無料で使えるWebツール一覧</li>
+  </ul>
+</article>
+
+<div class="footer">
+  新幹線はJR各社の定価、飛行機・バス・ホテルは2025〜26年の一般的な相場をもとにした概算です（2026年9月更新）<br>
+  <a href="https://kkpwebninja.com/" target="_blank">kkpwebninja.com</a>
+</div>
+
+<script>
+// ══════════════════════════════════════════════
+// ★ ここを自分のAgodaアフィリエイトIDに差し替え
+// ══════════════════════════════════════════════
+const AGODA_CID = "1234567";
+
+// ── エリアと球場 ──────────────────────────────
+const AREAS = {
+  sapporo:  {name:'札幌',  hotel:{cheap:4500,biz:9500, mid:15000}, agodaCity:15927},
+  sendai:   {name:'仙台',  hotel:{cheap:4000,biz:8500, mid:13000}, agodaCity:15738},
+  tokyo:    {name:'東京',  hotel:{cheap:6000,biz:14000,mid:22000}, agodaCity:5085},
+  yokohama: {name:'横浜',  hotel:{cheap:5500,biz:12000,mid:19000}, agodaCity:15776},
+  chiba:    {name:'千葉',  hotel:{cheap:5000,biz:11000,mid:17000}, agodaCity:5085},
+  saitama:  {name:'埼玉',  hotel:{cheap:5000,biz:11000,mid:16000}, agodaCity:5085},
+  nagoya:   {name:'名古屋',hotel:{cheap:4500,biz:9500, mid:15000}, agodaCity:14079},
+  osaka:    {name:'大阪',  hotel:{cheap:5000,biz:12000,mid:19000}, agodaCity:9590},
+  hiroshima:{name:'広島',  hotel:{cheap:4000,biz:8500, mid:13000}, agodaCity:15911},
+  fukuoka:  {name:'福岡',  hotel:{cheap:4500,biz:10000,mid:16000}, agodaCity:16101},
+};
+
+const STADIUMS = [
+  {id:'escon',   name:'エスコンフィールド（日本ハム）', area:'sapporo',  local:1200, localSub:'札幌駅→北広島駅→シャトル'},
+  {id:'rakuten', name:'楽天モバイルパーク（楽天）',     area:'sendai',   local:400,  localSub:'仙台駅→宮城野原駅'},
+  {id:'beluna',  name:'ベルーナドーム（西武）',         area:'saitama',  local:900,  localSub:'池袋→西武球場前'},
+  {id:'zozo',    name:'ZOZOマリン（ロッテ）',           area:'chiba',    local:800,  localSub:'海浜幕張駅→バス'},
+  {id:'jingu',   name:'神宮球場（ヤクルト）',           area:'tokyo',    local:400,  localSub:'新宿→外苑前'},
+  {id:'tokyodome',name:'東京ドーム（巨人）',            area:'tokyo',    local:400,  localSub:'東京駅→水道橋'},
+  {id:'yokohama',name:'横浜スタジアム（DeNA）',         area:'yokohama', local:400,  localSub:'横浜駅→関内'},
+  {id:'vantelin',name:'バンテリンドーム（中日）',       area:'nagoya',   local:500,  localSub:'名古屋駅→ナゴヤドーム前矢田'},
+  {id:'koshien', name:'甲子園（阪神）',                 area:'osaka',    local:600,  localSub:'梅田→甲子園（阪神電車）'},
+  {id:'kyocera', name:'京セラドーム（オリックス）',     area:'osaka',    local:400,  localSub:'難波→ドーム前'},
+  {id:'mazda',   name:'マツダスタジアム（広島）',       area:'hiroshima',local:0,    localSub:'広島駅から徒歩10分'},
+  {id:'paypay',  name:'PayPayドーム（ソフトバンク）',   area:'fukuoka',  local:500,  localSub:'博多→唐人町'},
+];
+
+// 出発地（エリアと同じ10都市）
+const ORIGINS = ['sapporo','sendai','tokyo','yokohama','chiba','saitama','nagoya','osaka','hiroshima','fukuoka'];
+
+// ── 交通費データ（片道・大人1人）──────────────────
+// 新幹線: 通常期・普通車指定席の定価（JR東海EX発売額 2025/10・JR東日本 2026/3改定を参照）
+// 飛行機: [下限,上限] LCC平日〜FSC週末の一般的な価格帯（セール・繁忙期・直前は除く）
+// バス  : [下限,上限] 夜行・高速バスの一般的な価格帯
+// 形式: {s:[料金,分], p:[下限,上限,分], b:[下限,上限,分]}  省略=その手段なし/非現実的
+const AREA_KEY = a=>({yokohama:'tokyo',chiba:'tokyo',saitama:'tokyo'})[a]||a;
+const FARE = {
+  // ── 東京発着 ──
+  'tokyo-nagoya':     {s:[11200,100],  p:null,               b:[3000,6000,330]},
+  'tokyo-osaka':      {s:[14620,150],  p:[5000,16000,70],    b:[4000,8000,480]},
+  'tokyo-hiroshima':  {s:[19660,235],  p:[8000,20000,85],    b:[7000,12000,720]},
+  'tokyo-fukuoka':    {s:[23710,295],  p:[8000,22000,110],   b:[10000,15000,840]},
+  'tokyo-sendai':     {s:[11630,92],   p:null,               b:[3000,6000,330]},
+  'tokyo-sapporo':    {s:[29920,480],  p:[8000,22000,95],    b:null},
+  // ── 名古屋発着 ──
+  'nagoya-osaka':     {s:[6580,50],    p:null,               b:[2500,5000,180]},
+  'nagoya-hiroshima': {s:[14710,140],  p:null,               b:[5000,8000,420]},
+  'nagoya-fukuoka':   {s:[19210,200],  p:[7000,16000,80],    b:[7000,11000,600]},
+  'nagoya-sendai':    {s:[22800,200],  p:[11000,20000,75],   b:[6000,10000,600]},
+  'nagoya-sapporo':   {s:null,         p:[7000,18000,105],   b:null},
+  // ── 大阪発着 ──
+  'osaka-hiroshima':  {s:[10850,85],   p:null,               b:[4000,7000,300]},
+  'osaka-fukuoka':    {s:[15920,150],  p:[7000,18000,70],    b:[5000,9000,540]},
+  'osaka-sendai':     {s:[22820,255],  p:[11000,22000,80],   b:[9000,13000,690]},
+  'osaka-sapporo':    {s:null,         p:[8000,20000,115],   b:null},
+  // ── 広島発着 ──
+  'hiroshima-fukuoka':{s:[9530,65],    p:null,               b:[3000,6000,300]},
+  'hiroshima-sendai': {s:[31000,340],  p:[15000,28000,85],   b:null},
+  'hiroshima-sapporo':{s:null,         p:[18000,32000,120],  b:null},
+  // ── 福岡発着 ──
+  'fukuoka-sendai':   {s:[35000,400],  p:[12000,25000,120],  b:null},
+  'fukuoka-sapporo':  {s:null,         p:[10000,25000,140],  b:null},
+  // ── 仙台発着 ──
+  'sendai-sapporo':   {s:[27000,300],  p:[8000,20000,70],    b:null},
+};
+// 関東内移動（在来線）
+const KANTO_LOCAL = 800;
+
+function getFare(fromArea,toArea){
+  const a=AREA_KEY(fromArea),b=AREA_KEY(toArea);
+  if(a===b){
+    if(a==='tokyo' && fromArea!==toArea) return {same:true,local:KANTO_LOCAL};
+    return {same:true,local:0};
+  }
+  const d=FARE[`${a}-${b}`]||FARE[`${b}-${a}`];
+  if(!d)return null;
+  const mid=(lo,hi)=>Math.round((lo+hi)/2/100)*100;
+  return {
+    same:false,
+    shinkansen: d.s ? {price:d.s[0], min:d.s[1], label:fmt(d.s[0])+'円', fixed:true} : null,
+    plane:      d.p ? {price:mid(d.p[0],d.p[1]), lo:d.p[0], hi:d.p[1], min:d.p[2], label:fmt(d.p[0])+'〜'+fmt(d.p[1])+'円'} : null,
+    bus:        d.b ? {price:mid(d.b[0],d.b[1]), lo:d.b[0], hi:d.b[1], min:d.b[2], label:fmt(d.b[0])+'〜'+fmt(d.b[1])+'円'} : null,
+  };
+}
+
+// ── UI 初期化 ──────────────────────────────────
+const fromSel=document.getElementById('from'),toSel=document.getElementById('to');
+ORIGINS.forEach(k=>{const o=document.createElement('option');o.value=k;o.textContent=AREAS[k].name;fromSel.appendChild(o);});
+STADIUMS.forEach(s=>{const o=document.createElement('option');o.value=s.id;o.textContent=s.name;toSel.appendChild(o);});
+fromSel.value='tokyo';toSel.value='koshien';
+
+let sel={trans:'shinkansen',nights:1,people:1,hotel:'biz'};
+function bindChips(id,key,isNum){
+  document.querySelectorAll(`#${id} .chip`).forEach(c=>{
+    c.onclick=()=>{
+      document.querySelectorAll(`#${id} .chip`).forEach(x=>x.classList.remove('active'));
+      c.classList.add('active');
+      sel[key]=isNum?parseInt(c.dataset.v):c.dataset.v;
+    };
+  });
+}
+bindChips('trans-chips','trans',false);
+bindChips('nights-chips','nights',true);
+bindChips('people-chips','people',true);
+bindChips('hotel-chips','hotel',false);
+
+const fmt=n=>Math.round(n).toLocaleString('ja-JP');
+const fmtMin=m=>m>=60?`${Math.floor(m/60)}時間${m%60?m%60+'分':''}`:`${m}分`;
+const TNAME={shinkansen:'🚄 新幹線',plane:'✈️ 飛行機',bus:'🚌 夜行バス'};
+
+let last=null;
+
+// ── 計算 ──────────────────────────────────────
+function calc(){
+  const fromKey=fromSel.value;
+  const st=STADIUMS.find(s=>s.id===toSel.value);
+  const fare=getFare(fromKey,st.area);
+  const area=AREAS[st.area];
+
+  let transOne=0,transSub='',transUsed=sel.trans;
+  if(fare.same){
+    transOne=fare.local;transSub=fare.local?'在来線（往復）':'同一エリアのため交通費なし';
+  }else{
+    let t=fare[sel.trans];
+    if(!t){
+      const alt=['shinkansen','plane','bus'].find(k=>fare[k]);
+      t=fare[alt];transUsed=alt;
+      transSub=`${TNAME[sel.trans]}は現実的でないため${TNAME[alt]}で計算 / 片道${t.label}・約${fmtMin(t.min)}`;
+    }else{
+      transSub=`片道${t.label}${t.fixed?'（定価）':'（中間値で計算）'}・約${fmtMin(t.min)}`;
+    }
+    transOne=t.price;
+  }
+  const transTotal=transOne*2*sel.people;
+  const hotelOne=area.hotel[sel.hotel];
+  // 2人以上は相部屋（ツイン等）想定で1人あたり約7割
+  const shareRate=sel.people>=2?0.7:1;
+  const hotelTotal=Math.round(hotelOne*sel.nights*sel.people*shareRate/100)*100;
+  const localTotal=st.local*2*sel.people;
+  const total=transTotal+hotelTotal+localTotal;
+
+  last={from:AREAS[fromKey].name,st,total,people:sel.people,nights:sel.nights};
+
+  document.getElementById('r-route').textContent=`${AREAS[fromKey].name} → ${st.name}`;
+  document.getElementById('r-cond').textContent=`${sel.nights===0?'日帰り':sel.nights+'泊'+(sel.nights+1)+'日'}・${sel.people}人・${TNAME[transUsed].replace(/^\S+ /,'')}`;
+  document.getElementById('r-total').textContent=fmt(total);
+  document.getElementById('r-per').textContent=sel.people>1?`1人あたり 約${fmt(total/sel.people)}円`:'';
+
+  document.getElementById('r-trans').textContent=fmt(transTotal)+'円';
+  document.getElementById('r-trans-sub').textContent=transSub+(sel.people>1?` × ${sel.people}人`:'');
+  document.getElementById('r-hotel').textContent=sel.nights?fmt(hotelTotal)+'円':'なし';
+  document.getElementById('r-hotel-sub').textContent=sel.nights?`${area.name}の相場 約${fmt(hotelOne)}円/泊 × ${sel.nights}泊${sel.people>1?' × '+sel.people+'人（相部屋想定で約7割）':''}`:'日帰りのため宿泊なし';
+  document.getElementById('r-local').textContent=localTotal?fmt(localTotal)+'円':'徒歩圏';
+  document.getElementById('r-local-sub').textContent=st.localSub;
+
+  // 移動手段比較
+  const cmp=document.getElementById('trans-compare');cmp.innerHTML='';
+  if(fare.same){
+    cmp.innerHTML='<div style="grid-column:1/-1;font-size:12px;color:var(--gray);text-align:center;padding:8px;">同一エリアのため比較なし</div>';
+  }else{
+    ['shinkansen','plane','bus'].forEach(k=>{
+      const t=fare[k];
+      const d=document.createElement('div');
+      d.className='trans-card'+(k===transUsed?' active':'')+(t?'':' na');
+      d.innerHTML=`<div class="trans-icon">${TNAME[k].split(' ')[0]}</div><div class="trans-name">${TNAME[k].split(' ')[1]}</div>`+
+        (t?`<div class="trans-price" style="font-size:${t.fixed?12:10}px">${t.label}</div><div class="trans-time">${fmtMin(t.min)}</div>`:`<div class="trans-time">—</div>`);
+      if(t){d.onclick=()=>{sel.trans=k;document.querySelectorAll('#trans-chips .chip').forEach(c=>c.classList.toggle('active',c.dataset.v===k));calc();};}
+      cmp.appendChild(d);
+    });
+  }
+
+  // Agoda
+  document.getElementById('aff-city').textContent=area.name;
+  const agodaUrl=`https://www.agoda.com/partners/partnersearch.aspx?cid=${AGODA_CID}&city=${area.agodaCity}`;
+  ['aff-link','hero-cta','bd-link'].forEach(id=>document.getElementById(id).href=agodaUrl);
+  document.getElementById('hero-cta-city').textContent=area.name;
+  document.getElementById('hero-cta').style.display=sel.nights?'block':'none';
+  document.getElementById('aff-desc').textContent=sel.nights
+    ?`${area.name}のビジネスホテルは約${fmt(area.hotel.biz)}円が目安。試合開催日は球場周辺から埋まるので、早めに実際の価格をチェックしておきましょう。`
+    :`日帰りでも試合後に泊まると翌日ゆっくり観光できます。${area.name}の実際のホテル価格をチェックしてみましょう。`;
+
+  document.getElementById('page-input').classList.add('hidden');
+  document.getElementById('page-result').classList.remove('hidden');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function back(){
+  document.getElementById('page-result').classList.add('hidden');
+  document.getElementById('page-input').classList.remove('hidden');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function share(){
+  if(!last)return;
+  const text=`⚾ 遠征費計算ツール\n${last.from} → ${last.st.name}\n${last.nights?last.nights+'泊':'日帰り'}・${last.people}人で 約${fmt(last.total)}円\n\n自分の遠征も計算してみる👇`;
+  if(navigator.share){navigator.share({title:'プロ野球 遠征費計算ツール',text,url:location.href});}
+  else{navigator.clipboard.writeText(text+'\n'+location.href).then(()=>alert('コピーしました！'));}
+}
+</script>
+</body>
+</html>
