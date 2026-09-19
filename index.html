@@ -109,6 +109,8 @@ body{font-family:"M PLUS Rounded 1c","Hiragino Maru Gothic ProN","Hiragino Sans"
 .faq dt{font-size:16px;font-weight:800;margin-top:14px;padding-left:24px;position:relative;}
 .faq dt::before{content:'Q';position:absolute;left:0;color:var(--orange-dark);font-weight:800;}
 .faq dd{font-size:15px;line-height:1.8;color:var(--dark);padding-left:24px;margin-top:4px;}
+.team-link{font-size:15px;margin:0 2px 12px;}
+.team-link a{color:var(--blue);font-weight:700;}
 .src{font-size:13px;color:var(--gray);line-height:1.8;padding:8px 16px 0;}
 .kkp-ad{text-align:center;margin:1.4rem auto 0;max-width:680px;min-height:288px;padding-top:6px}
 .kkp-ad-label{font-size:11px;color:#999;letter-spacing:.08em;margin:0 0 6px;line-height:1}
@@ -221,6 +223,8 @@ body{font-family:"M PLUS Rounded 1c","Hiragino Maru Gothic ProN","Hiragino Sans"
     </a>
     <div class="aff-note">※上記はAgodaのアフィリエイト広告です。リンク経由で予約されると当サイトに報酬が入りますが、価格が上がることはありません。</div>
   </div>
+
+  <p class="team-link hidden" id="team-link-wrap"><a id="team-link" href="https://npb-magic.kkpwebninja.com/">順位・優勝マジックを見る</a></p>
 
   <div class="breakdown">
     <div class="bd-title">移動手段を比べる（片道・1人）</div>
@@ -356,18 +360,18 @@ const GENRES = [
 ];
 const STADIUMS = [
   // ── 野球 ──
-  {g:'baseball',id:'escon',    name:'エスコンフィールド（日本ハム）', area:'sapporo',  local:1200, localSub:'札幌駅→北広島駅→シャトル'},
-  {g:'baseball',id:'rakuten',  name:'楽天モバイルパーク（楽天）',     area:'sendai',   local:400,  localSub:'仙台駅→宮城野原駅'},
-  {g:'baseball',id:'beluna',   name:'ベルーナドーム（西武）',         area:'saitama',  local:900,  localSub:'池袋→西武球場前'},
-  {g:'baseball',id:'zozo',     name:'ZOZOマリン（ロッテ）',           area:'chiba',    local:800,  localSub:'海浜幕張駅→バス'},
-  {g:'baseball',id:'jingu',    name:'神宮球場（ヤクルト）',           area:'tokyo',    local:400,  localSub:'新宿→外苑前'},
-  {g:'baseball',id:'tokyodome',name:'東京ドーム（巨人）',             area:'tokyo',    local:400,  localSub:'東京駅→水道橋'},
-  {g:'baseball',id:'yokohama', name:'横浜スタジアム（DeNA）',         area:'yokohama', local:400,  localSub:'横浜駅→関内'},
-  {g:'baseball',id:'vantelin', name:'バンテリンドーム（中日）',       area:'nagoya',   local:500,  localSub:'名古屋駅→ナゴヤドーム前矢田'},
-  {g:'baseball',id:'koshien',  name:'甲子園（阪神）',                 area:'osaka',    local:600,  localSub:'梅田→甲子園（阪神電車）'},
-  {g:'baseball',id:'kyocera',  name:'京セラドーム（オリックス）',     area:'osaka',    local:400,  localSub:'難波→ドーム前'},
-  {g:'baseball',id:'mazda',    name:'マツダスタジアム（広島）',       area:'hiroshima',local:0,    localSub:'広島駅から徒歩10分'},
-  {g:'baseball',id:'paypay',   name:'PayPayドーム（ソフトバンク）',   area:'fukuoka',  local:500,  localSub:'博多→唐人町'},
+  {g:'baseball',id:'escon',    name:'エスコンフィールド（日本ハム）', area:'sapporo',  local:1200, localSub:'札幌駅→北広島駅→シャトル', team:'fighters'},
+  {g:'baseball',id:'rakuten',  name:'楽天モバイルパーク（楽天）',     area:'sendai',   local:400,  localSub:'仙台駅→宮城野原駅', team:'eagles'},
+  {g:'baseball',id:'beluna',   name:'ベルーナドーム（西武）',         area:'saitama',  local:900,  localSub:'池袋→西武球場前', team:'lions'},
+  {g:'baseball',id:'zozo',     name:'ZOZOマリン（ロッテ）',           area:'chiba',    local:800,  localSub:'海浜幕張駅→バス', team:'marines'},
+  {g:'baseball',id:'jingu',    name:'神宮球場（ヤクルト）',           area:'tokyo',    local:400,  localSub:'新宿→外苑前', team:'swallows'},
+  {g:'baseball',id:'tokyodome',name:'東京ドーム（巨人）',             area:'tokyo',    local:400,  localSub:'東京駅→水道橋', team:'giants'},
+  {g:'baseball',id:'yokohama', name:'横浜スタジアム（DeNA）',         area:'yokohama', local:400,  localSub:'横浜駅→関内', team:'baystars'},
+  {g:'baseball',id:'vantelin', name:'バンテリンドーム（中日）',       area:'nagoya',   local:500,  localSub:'名古屋駅→ナゴヤドーム前矢田', team:'dragons'},
+  {g:'baseball',id:'koshien',  name:'甲子園（阪神）',                 area:'osaka',    local:600,  localSub:'梅田→甲子園（阪神電車）', team:'tigers'},
+  {g:'baseball',id:'kyocera',  name:'京セラドーム（オリックス）',     area:'osaka',    local:400,  localSub:'難波→ドーム前', team:'buffaloes'},
+  {g:'baseball',id:'mazda',    name:'マツダスタジアム（広島）',       area:'hiroshima',local:0,    localSub:'広島駅から徒歩10分', team:'carp'},
+  {g:'baseball',id:'paypay',   name:'PayPayドーム（ソフトバンク）',   area:'fukuoka',  local:500,  localSub:'博多→唐人町', team:'hawks'},
   // ── ライブ・コンサート ──
   {g:'live',id:'l-tokyodome', name:'東京ドーム',                    area:'tokyo',    local:400,  localSub:'東京駅→水道橋'},
   {g:'live',id:'l-kokuritsu', name:'国立競技場',                    area:'tokyo',    local:400,  localSub:'新宿→千駄ヶ谷'},
@@ -497,6 +501,17 @@ GENRES.forEach(g=>{
 });
 fillVenues('l-kyocera');
 fromSel.value='tokyo';
+// 他ページからの着地: ?g=baseball&to=koshien&from=osaka（不正な値は無視して初期値のまま）
+(function(){
+  const q=new URLSearchParams(location.search);
+  const g=q.get('g'), to=q.get('to'), from=q.get('from');
+  const st=to && STADIUMS.find(v=>v.id===to);
+  const gg=st?st.g:(GENRES.some(x=>x.id===g)?g:null);
+  if(gg){ genre=gg; [...gc.children].forEach((c,i)=>c.classList.toggle('active',GENRES[i].id===gg)); fillVenues(st?st.id:null); }
+  if(from && ORIGINS.includes(from)) fromSel.value=from;
+  // 行き先と同じ都市が出発地だと交通費0円になるので、その場合は出発地を東京か大阪に寄せる
+  if(st && !from){ const a=AREA_KEY(st.area); if(a===AREA_KEY(fromSel.value)) fromSel.value=(a==='tokyo'?'osaka':'tokyo'); }
+})();
 
 let sel={trans:'shinkansen',nights:1,people:1,hotel:'biz'};
 function bindChips(id,key,isNum){
@@ -577,6 +592,15 @@ function calc(){
       cmp.appendChild(d);
     });
   }
+
+  // 野球の球場なら、その球団の順位・優勝マジックのページへ
+  const tw=document.getElementById('team-link-wrap'), tl=document.getElementById('team-link');
+  if(st.team){
+    tl.href='https://npb-magic.kkpwebninja.com/team/'+st.team;
+    tl.textContent=st.name.replace(/^.*（(.+)）$/,'$1')+'の順位・優勝マジック・CS進出の状況を見る';
+    tl.onclick=()=>gtag('event','xlink_npb_magic',{team:st.team});
+    tw.classList.remove('hidden');
+  }else{ tw.classList.add('hidden'); }
 
   // Agoda
   document.getElementById('aff-city').textContent=area.name;
