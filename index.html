@@ -160,6 +160,16 @@ body.k-page{background:var(--k-surface) url(/kit/img/d4-washi.webp) 0 0/320px au
 .seo-list a,.team-link a,.usecase a{color:var(--k-sumi);font-weight:700;text-decoration:underline;text-decoration-color:var(--k-orange);text-decoration-thickness:2px;text-underline-offset:4px}
 .seo-list a:hover,.team-link a:hover,.usecase a:hover{color:var(--k-shu)}
 .faq dt::before{color:var(--k-shu);font-family:var(--k-bold);font-weight:400}
+/* ===== 2026-10-20 清潔感（kkp-kit 17eac63 の方針）: 6段の入力を枠＋影の箱から罫線1本の段に・番号は四角をやめ墨の数字（k-steps の形）・入れ物に影を付けない・装飾の絵文字をやめる =====
+   金額・出典・計算・アフィリ（Agoda/A8）の枠（.aff/.hero-cta/.bd-link）と位置・PR表記・広告は不変。早見表の ✈（飛行機の相場の印）は意味があるので残す。 */
+#page-input .card{background:none;border:0;border-bottom:1px solid var(--k-line-soft);border-radius:0;box-shadow:none;padding:14px 2px;margin-bottom:0}
+#page-input .grid2{gap:0 16px}
+.step{background:none;border:0;border-radius:0;padding:0;font-size:18px;line-height:1;color:var(--k-sumi);min-width:14px}
+.card{box-shadow:none}
+.result-hero,.breakdown{box-shadow:none}
+.trans-card{min-height:44px}
+.seo h2{background:none;border:0;border-bottom:var(--k-bw-s) solid var(--k-sumi);border-radius:0;padding:0 0 6px}
+.seo-tbl tbody th small,.seo-tbl td small{font-size:12px}
 </style>
 <!-- kkp-rel-d4:start -->
 <style id="kkp-rel-d4">
@@ -201,9 +211,9 @@ body.k-page{background:var(--k-surface) url(/kit/img/d4-washi.webp) 0 0/320px au
   <div class="card">
     <div class="card-label"><span class="step">3</span>移動手段</div>
     <div class="chip-row" id="trans-chips">
-      <button class="chip active" data-v="shinkansen">🚄 新幹線</button>
-      <button class="chip" data-v="plane">✈️ 飛行機</button>
-      <button class="chip" data-v="bus">🚌 夜行バス</button>
+      <button class="chip active" data-v="shinkansen">新幹線</button>
+      <button class="chip" data-v="plane">飛行機</button>
+      <button class="chip" data-v="bus">夜行バス</button>
     </div>
   </div>
 
@@ -601,7 +611,7 @@ bindChips('hotel-chips','hotel',false);
 
 const fmt=n=>Math.round(n).toLocaleString('ja-JP');
 const fmtMin=m=>m>=60?`${Math.floor(m/60)}時間${m%60?m%60+'分':''}`:`${m}分`;
-const TNAME={shinkansen:'🚄 新幹線',plane:'✈️ 飛行機',bus:'🚌 夜行バス'};
+const TNAME={shinkansen:'新幹線',plane:'飛行機',bus:'夜行バス'};
 
 let last=null;
 
@@ -657,7 +667,7 @@ function calc(){
       const t=fare[k];
       const d=document.createElement('div');
       d.className='trans-card'+(k===transUsed?' active':'')+(t?'':' na');
-      d.innerHTML=`<div class="trans-icon">${TNAME[k].split(' ')[0]}</div><div class="trans-name">${TNAME[k].split(' ')[1]}</div>`+
+      d.innerHTML=`<div class="trans-name">${TNAME[k]}</div>`+
         (t?`<div class="trans-price" style="font-size:${t.fixed?12:10}px">${t.label}</div><div class="trans-time">${fmtMin(t.min)}</div>`:`<div class="trans-time">—</div>`);
       if(t){d.onclick=()=>{sel.trans=k;document.querySelectorAll('#trans-chips .chip').forEach(c=>c.classList.toggle('active',c.dataset.v===k));calc();};}
       cmp.appendChild(d);
