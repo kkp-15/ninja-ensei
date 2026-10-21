@@ -22,7 +22,7 @@ assert 'Person' not in s and 'kkpwebninja.com/ensei/' not in s and 'fonts.google
 css_new=open('scripts/style_v1.css',encoding='utf-8').read()
 s=re.sub(r'<style>.*?</style>','<style>\n'+css_new+'</style>',s,flags=re.S)
 s=s.replace('''<div class="hero">
-  <h1>🧳 遠征費計算ツール<br><span style="font-size:13px;font-weight:700;opacity:.9">ライブ・野球・サッカー観戦の交通費＋ホテル代はいくら？</span></h1>
+  <h1>🧳 遠征費計算ツール<br><span style="font-size:14px;font-weight:700;opacity:.9">ライブ・野球・サッカー観戦の交通費＋ホテル代はいくら？</span></h1>
   <p>出発地と会場を選ぶだけ。交通費＋ホテル代の目安を3秒で概算</p>
 </div>
 <div class="pr-notice">本ページにはプロモーション（Agodaのアフィリエイト広告）が含まれます。</div>''',

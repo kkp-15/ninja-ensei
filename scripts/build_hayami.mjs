@@ -7,9 +7,9 @@ const cities = ['tokyo','nagoya','osaka','hiroshima','fukuoka','sendai','sapporo
 const fmt = n => n.toLocaleString('ja-JP');
 const rows = cities.map(to => {
   const cells = cities.map(from => {
-    if (from === to) return '<td style="color:#9CA3AF">—</td>';
+    if (from === to) return '<td style="color:#697281">—</td>';
     const c = hayamiCell(d, from, to);
-    if (!c) return '<td style="color:#9CA3AF">—</td>';
+    if (!c) return '<td style="color:#697281">—</td>';
     return `<td>${fmt(c.total)}円<small>${c.plane ? '✈' : ''}</small></td>`;
   }).join('');
   return `<tr><th>${d.AREAS[to].name}へ<br><small>ビジホ約${fmt(d.AREAS[to].hotel.biz)}円</small></th>${cells}</tr>`;
