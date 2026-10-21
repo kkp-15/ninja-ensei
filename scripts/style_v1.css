@@ -76,6 +76,6 @@ body{font-family:"M PLUS Rounded 1c","Hiragino Maru Gothic ProN","Hiragino Sans"
 .faq dd{font-size:15px;line-height:1.8;color:var(--dark);padding-left:24px;margin-top:4px;}
 .src{font-size:14px;color:var(--gray);line-height:1.8;padding:8px 16px 0;}
 .kkp-ad{text-align:center;margin:1.4rem auto 0;max-width:680px;min-height:288px;padding-top:6px}
-.kkp-ad-label{font-size:11px;color:#999;letter-spacing:.08em;margin:0 0 6px;line-height:1}
+.kkp-ad-label{font-size:12px;color:#666;letter-spacing:.08em;margin:0 0 6px;line-height:1}
 .kkp-ad ins.adsbygoogle{display:block;width:300px;height:250px;margin:0 auto}
 @media(min-width:768px){.kkp-ad{min-height:318px}.kkp-ad ins.adsbygoogle{width:336px;height:280px}}
