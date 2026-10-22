@@ -3,7 +3,7 @@ import re
 p='index.html'; s=open(p,encoding='utf-8').read()
 BASE='https://ensei.kkpwebninja.com/'
 s=s.replace('<link rel="canonical" href="https://kkpwebninja.com/ensei/">','<link rel="canonical" href="'+BASE+'">\n<meta name="theme-color" content="#ff8a3d">\n<!-- WEBNINJA_UNIFIED_FAVICON -->\n<link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">\n<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">\n<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">')
-s=s.replace('<meta property="og:url" content="https://kkpwebninja.com/ensei/">','<meta property="og:url" content="'+BASE+'">\n<meta property="og:image" content="'+BASE+'ogp.jpg?d=20261023">\n<meta name="twitter:image" content="'+BASE+'ogp.jpg?d=20261023">')
+s=s.replace('<meta property="og:url" content="https://kkpwebninja.com/ensei/">','<meta property="og:url" content="'+BASE+'">\n<meta property="og:image" content="'+BASE+'ogp.jpg?d=20261023b">\n<meta name="twitter:image" content="'+BASE+'ogp.jpg?d=20261023b">')
 s=s.replace('<meta property="og:site_name" content="kkpwebninja.com">','<meta property="og:site_name" content="遠征費計算ツール｜web忍者の砦">')
 s=s.replace('https://kkpwebninja.com/ensei/',BASE)
 s=s.replace('"author": {"@type": "Person", "name": "KKP", "url": "https://kkpwebninja.com/"}','"author": {"@type": "Organization", "name": "web忍者の砦", "url": "https://kkpwebninja.com/"}')
