@@ -171,6 +171,9 @@ body.k-page{background:var(--k-surface) url(/kit/img/d4-washi.webp) 0 0/320px au
 .trans-card{min-height:44px}
 .seo h2{background:none;border:0;border-bottom:var(--k-bw-s) solid var(--k-sumi);border-radius:0;padding:0 0 6px}
 .seo-tbl tbody th small,.seo-tbl td small{font-size:14px}
+/* 2026-10-25 「遠征費を計算する」を画面の下に残す（375x812 で y=918 の画面外だった） */
+#page-input .calc-btn{position:sticky;bottom:calc(8px + env(safe-area-inset-bottom));z-index:20}
+#page-result .retry{margin:12px 0 4px}
 </style>
 <!-- kkp-rel-d4:start -->
 <style id="kkp-rel-d4">
@@ -279,6 +282,9 @@ body.k-page{background:var(--k-surface) url(/kit/img/d4-washi.webp) 0 0/320px au
     </div>
   </div>
 
+  <!-- 2026-10-25 「条件を変えて再計算」は内訳のすぐ下に（ページの最後 y=1857 だと遠かった） -->
+  <button class="retry k-btn k-btn-sub" onclick="back()">条件を変えて再計算</button>
+
   <!-- 挿し絵（2026-09-25・Codex制作・シリーズ共通の2人）。金額を読み終えて、旅の準備に気持ちが移るところ。
        特定の球団・会場に見えない絵。結果が出たときだけ見える（#page-result の中） -->
   <img class="trip-pic" src="/img/ready-trip.webp" width="360" height="320" alt="" loading="lazy" decoding="async">
@@ -322,7 +328,6 @@ body.k-page{background:var(--k-surface) url(/kit/img/d4-washi.webp) 0 0/320px au
     </div></details>
   </div>
 
-  <button class="retry k-btn k-btn-sub" onclick="back()">条件を変えて再計算</button>
   <div class="share-row" id="share-row">
     <button type="button" onclick="copyResult()">コピー</button>
   </div>
