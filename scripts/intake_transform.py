@@ -17,7 +17,7 @@ s=s.replace('<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:w
   gtag('config', 'G-2LM85GJN0L');
 </script>
 <!-- AdSense -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1298304917726270" crossorigin="anonymous"></script>''')
+<script async data-overlays="bottom" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1298304917726270" crossorigin="anonymous"></script>''')
 assert 'Person' not in s and 'kkpwebninja.com/ensei/' not in s and 'fonts.googleapis' not in s
 css_new=open('scripts/style_v1.css',encoding='utf-8').read()
 s=re.sub(r'<style>.*?</style>','<style>\n'+css_new+'</style>',s,flags=re.S)
