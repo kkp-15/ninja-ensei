@@ -174,6 +174,21 @@ body.k-page{background:var(--k-surface) url(/kit/img/d4-washi.webp) 0 0/320px au
 /* 2026-10-25 「遠征費を計算する」を画面の下に残す（375x812 で y=918 の画面外だった） */
 #page-input .calc-btn{position:sticky;bottom:calc(8px + env(safe-area-inset-bottom));z-index:20}
 #page-result .retry{margin:12px 0 4px}
+/* 本の紹介（Amazonアソシエイト・2026-11-04） */
+.bk{margin-top:26px}
+.bk>h2{margin:0;padding-bottom:4px;border-bottom:2px solid var(--k-sumi);font-size:18px;font-weight:800}
+.bk-pr{margin:8px 0 2px;font-size:12px;line-height:1.6;color:var(--k-text-2)}
+.bk-pr span{display:inline-block;margin-right:6px;padding:0 5px;border:1.5px solid var(--k-text-2);border-radius:3px;font-weight:800}
+.bk-list{margin:0;padding:0;list-style:none}
+.bk-list li{border-bottom:1px solid var(--k-line-soft)}
+.bk-list a{display:flex;flex-direction:column;justify-content:center;min-height:52px;padding:8px 26px 8px 0;position:relative;text-decoration:none;color:var(--k-sumi)}
+.bk-list b{font-size:15px;font-weight:800;line-height:1.45}
+.bk-list span{font-size:13px;line-height:1.5;color:var(--k-text-2)}
+.bk-list em{font-style:normal;font-weight:800;color:var(--k-sumi)}
+.bk-list a::after{content:"→";position:absolute;right:4px;top:50%;transform:translateY(-50%);color:var(--k-orange)}
+.bk-ku{margin:8px 0 0;font-size:13px;line-height:1.7;color:var(--k-text-2)}
+.bk-ku a{font-weight:800;color:var(--k-sumi)}
+#page-result .bk{margin:22px 0 18px}
 </style>
 <!-- kkp-rel-d4:start -->
 <style id="kkp-rel-d4">
@@ -318,6 +333,16 @@ body.k-page{background:var(--k-surface) url(/kit/img/d4-washi.webp) 0 0/320px au
          data-ad-format="rectangle"
          data-full-width-responsive="false"></ins>
   </div>
+
+  <!-- 本の紹介（Amazonアソシエイト・2026-11-04。価格は書かない・読み放題は置いた日に商品ページで確認） -->
+  <section class="bk" aria-labelledby="bk-h">
+    <h2 id="bk-h">野球場めぐりの本</h2>
+    <p class="bk-pr"><span>PR</span>Amazonのリンクです。Amazonのアソシエイトとして、web忍者の砦は適格販売により収入を得ています。</p>
+    <ul class="bk-list">
+      <li><a href="https://www.amazon.co.jp/dp/B0847FMNQ5?tag=kkp15-22" target="_blank" rel="nofollow sponsored noopener" onclick="if(typeof gtag==='function')gtag('event','aff_amazon_book')"><b>日本の野球場100選巡礼</b><span>久保田登志雄</span></a></li>
+      <li><a href="https://www.amazon.co.jp/dp/4768458009?tag=kkp15-22" target="_blank" rel="nofollow sponsored noopener" onclick="if(typeof gtag==='function')gtag('event','aff_amazon_book')"><b>全国野球場巡り 877カ所訪問観戦記</b><span>斉藤振一郎</span></a></li>
+    </ul>
+  </section>
 
   <div class="notice">
     <b>金額は目安です。</b>実際の料金は各公式サイト・予約サイトで確かめてください。
