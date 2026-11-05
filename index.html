@@ -707,8 +707,9 @@ function calc(){
   // 野球の球場なら、その球団の順位・優勝マジックのページへ
   const tw=document.getElementById('team-link-wrap'), tl=document.getElementById('team-link');
   if(st.team){
-    tl.href='https://npb-magic.kkpwebninja.com/team/'+st.team;
-    tl.textContent=st.name.replace(/^.*（(.+)）$/,'$1')+'の2026年の最終順位と2027年の開幕日程を見る';
+    // 2027年の日程が出たので、球団別の日程カレンダーへ（2026-11-05。順位は日程ページから球団ページへ行ける）
+    tl.href='https://npb-magic.kkpwebninja.com/schedule/?team='+st.team;
+    tl.textContent=st.name.replace(/^.*（(.+)）$/,'$1')+'の2027年の日程（どの日にどこと試合があるか）を見る';
     tl.onclick=()=>gtag('event','xlink_npb_magic',{team:st.team});
     tw.classList.remove('hidden');
   }else{ tw.classList.add('hidden'); }
