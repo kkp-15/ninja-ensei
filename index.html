@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="msvalidate.01" content="EF6E7C7B123A3218DAE3B152F5B0764D" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>遠征費計算ツール【2026年版】ライブ・野球・サッカー観戦の交通費＋ホテル代を3秒で概算</title>
+<title>遠征費計算ツール【2027年版】ライブ・野球・サッカー観戦の交通費＋ホテル代を3秒で概算</title>
 <meta name="description" content="遠征費はいくら？出発地と会場を選ぶだけで、新幹線・飛行機・夜行バスの交通費＋ホテル代の目安を無料で計算。東京ドーム・京セラドーム・さいたまスーパーアリーナ・横浜アリーナなどライブ会場、プロ野球12球場、Jリーグ主要スタジアムに対応。">
 <link rel="canonical" href="https://ensei.kkpwebninja.com/">
 <meta name="theme-color" content="#ff8a3d">
@@ -447,7 +447,15 @@ body.k-page{background:var(--k-surface) url(/kit/img/d4-washi.webp) 0 0/320px au
 <script>
 // 宿の予約リンク: A8.net のアゴダ商品リンク（掲載サイト web忍者の砦）。飛び先は agoda.com の都市ページ（パラメータ無し）
 const A8_AGODA = 'https://px.a8.net/svt/ejp?a8mat=4BCE3O+3O6AMA+4X1W+BW8O2&a8ejpredirect=';
-const agodaLinkFor = slug => A8_AGODA + encodeURIComponent('https://www.agoda.com/ja-jp/city/' + slug + '.html');
+// 試合日（?date=YYYY-MM-DD・日程ページから）があるときは、その日から泊数・人数を入れた検索ページへ。
+// 都市ページは日付を受け取らないため、検索ページを都市の番号で開く（番号は各都市ページのリンクから取得・2026-11-05 確認）
+const AGODA_CITY = {'sapporo-jp':3435,'sendai-jp':10345,'tokyo-jp':5085,'yokohama-jp':4590,'chiba-jp':5375,'saitama-jp':18827,'nagoya-jp':13740,'osaka-jp':9590,'hiroshima-jp':10554,'fukuoka-jp':16527};
+const TRIP_DATE = (()=>{const v=new URLSearchParams(location.search).get('date');if(!/^\d{4}-\d{2}-\d{2}$/.test(v||''))return null;
+  const d=new Date(v+'T00:00:00'),t=new Date();t.setHours(0,0,0,0);return isNaN(d)||d<t?null:v})();
+const agodaLinkFor = (slug,nights,people) => A8_AGODA + encodeURIComponent(TRIP_DATE&&nights&&AGODA_CITY[slug]
+  ? `https://www.agoda.com/ja-jp/search?city=${AGODA_CITY[slug]}&checkIn=${TRIP_DATE}&los=${nights}&rooms=1&adults=${people||1}`
+  : 'https://www.agoda.com/ja-jp/city/' + slug + '.html');
+const tripDateJp = () => {const d=new Date(TRIP_DATE+'T00:00:00');return `${d.getMonth()+1}/${d.getDate()}（${'日月火水木金土'[d.getDay()]}）`};
 
 // ── エリアと球場 ──────────────────────────────
 const AREAS = {
@@ -676,7 +684,7 @@ function calc(){
 
   last={from:AREAS[fromKey].name,st,total,people:sel.people,nights:sel.nights};
 
-  document.getElementById('r-route').textContent=`${AREAS[fromKey].name} → ${st.name}`;
+  document.getElementById('r-route').textContent=`${AREAS[fromKey].name} → ${st.name}`+(TRIP_DATE?`・${tripDateJp()}`:'');
   document.getElementById('r-cond').textContent=`${sel.nights===0?'日帰り':sel.nights+'泊'+(sel.nights+1)+'日'}・${sel.people}人・${TNAME[transUsed].replace(/^\S+ /,'')}`;
   document.getElementById('r-total').textContent=fmt(total);
   document.getElementById('r-per').textContent=sel.people>1?`1人あたり 約${fmt(total/sel.people)}円`:'';
@@ -716,12 +724,12 @@ function calc(){
 
   // Agoda
   document.getElementById('aff-city').textContent=area.name;
-  const agodaUrl=agodaLinkFor(area.agoda);
+  const agodaUrl=agodaLinkFor(area.agoda,sel.nights,sel.people);
   ['aff-link','hero-cta','bd-link'].forEach(id=>{const el=document.getElementById(id);el.href=agodaUrl;el.onclick=()=>gtag('event','ensei_cta',{choice:'hotel',from:id,city:area.name});});
   document.getElementById('hero-cta-city').textContent=area.name;
   document.getElementById('hero-cta').style.display=sel.nights?'block':'none';
   document.getElementById('aff-desc').textContent=sel.nights
-    ?`${area.name}のビジネスホテルは約${fmt(area.hotel.biz)}円が目安。公演日・試合日は会場周辺から埋まるので、早めに実際の価格をチェックしておきましょう。`
+    ?(TRIP_DATE?`${tripDateJp()}から${sel.nights}泊の${area.name}の宿を、日付を入れた状態で探せます。`:'')+`${area.name}のビジネスホテルは約${fmt(area.hotel.biz)}円が目安。公演日・試合日は会場周辺から埋まるので、早めに実際の価格をチェックしておきましょう。`
     :`日帰りでも終演後に泊まると翌日ゆっくり観光できます。${area.name}の実際のホテル価格をチェックしてみましょう。`;
 
   if(!window.__adPushed){window.__adPushed=true;try{(adsbygoogle=window.adsbygoogle||[]).push({});}catch(e){}}
