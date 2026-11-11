@@ -204,6 +204,17 @@ body.k-page{background:var(--k-surface) url(/kit/img/d4-washi.webp) 0 0/320px au
 @media screen and (max-width:712px){.kkp-rel{max-width:calc(100vw - 24px)!important;margin-left:auto!important;margin-right:auto!important}}
 </style>
 <!-- kkp-rel-d4:end -->
+<style id="bb-pick-css">
+.bb-pick{margin-top:12px;padding-top:10px;border-top:1px solid #d9cbb5}
+.bb-h{display:block;font-size:15px;font-weight:700;margin:0 0 6px}
+#open-chips{margin-bottom:12px}
+#open-chips{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+#open-chips .chip{min-height:44px;font-size:14px;padding:4px 8px;line-height:1.35}
+#open-chips .chip small{display:block;font-size:14px;font-weight:600}
+@media(min-width:700px){#open-chips{grid-template-columns:1fr 1fr 1fr}}
+.date-line{margin-top:8px;font-size:15px;font-weight:700}
+.date-line button{margin-left:8px;min-height:44px;padding:0 12px;border:1px solid #bbb;border-radius:6px;background:#fff;font:inherit;font-size:14px;cursor:pointer}
+</style>
 <style id="trial-less-ai">
 /* 2026-11-10 AIっぽさを減らす: 答えの枠だけ残し、内訳は細線で区切る。戻すならこの塊を消す */
 .breakdown{background:transparent;border:0;border-top:1px solid #d9cbb5;border-radius:0;box-shadow:none;padding:12px 2px}
@@ -228,6 +239,15 @@ body.k-page{background:var(--k-surface) url(/kit/img/d4-washi.webp) 0 0/320px au
     <div class="card-label"><span class="step">2</span>行き先</div>
     <div class="chip-row" id="genre-chips" style="margin-bottom:10px;"></div>
     <select class="sel" id="to"></select>
+    <!-- 2026-11-11 野球だけ: 2027年の日程（npb-magic の data/schedule_2027.json の写し・出どころは NPB公式）から会場と試合日を入れる -->
+    <div class="bb-pick hidden" id="bb-pick">
+      <p class="bb-h">2027年の開幕カード（3/26 金）</p>
+      <div class="chip-row" id="open-chips"></div>
+      <label class="bb-h" for="bb-team">応援する球団のビジター試合から選ぶ（2027年）</label>
+      <select class="sel" id="bb-team"><option value="">球団を選ぶ</option></select>
+      <select class="sel hidden" id="bb-game" aria-label="試合を選ぶ" style="margin-top:8px"></select>
+    </div>
+    <p class="date-line hidden" id="date-line"></p>
   </div>
 
   <div class="card">
@@ -291,7 +311,7 @@ body.k-page{background:var(--k-surface) url(/kit/img/d4-washi.webp) 0 0/320px au
       <div class="bd-val" id="r-trans"></div>
     </div>
     <div class="bd-row">
-      <div><div class="bd-name">ホテル代</div><div class="bd-sub" id="r-hotel-sub"></div><a class="bd-link" id="bd-link" href="#" target="_blank" rel="sponsored nofollow noopener"><span class="pr-badge">PR</span>Agodaで空室と価格を確認 →</a></div>
+      <div><div class="bd-name">ホテル代</div><div class="bd-sub" id="r-hotel-sub"></div></div>
       <div class="bd-val" id="r-hotel"></div>
     </div>
     <div class="bd-row">
@@ -306,20 +326,6 @@ body.k-page{background:var(--k-surface) url(/kit/img/d4-washi.webp) 0 0/320px au
   <!-- 挿し絵（2026-09-25・Codex制作・シリーズ共通の2人）。金額を読み終えて、旅の準備に気持ちが移るところ。
        特定の球団・会場に見えない絵。結果が出たときだけ見える（#page-result の中） -->
   <img class="trip-pic" src="/img/ready-trip.webp" width="360" height="320" alt="" loading="lazy" decoding="async">
-
-  <!-- ===== Agoda CTA ===== -->
-  <div class="aff" id="aff-box">
-    <div class="aff-head">
-      <span class="aff-badge">PR</span>
-      <span class="aff-title">実際のホテル料金を調べてみる</span>
-    </div>
-    <div class="aff-desc" id="aff-desc">目安がわかったら、実際の空室と価格をチェック。公演日・試合日は会場周辺から埋まっていくので早めの確認がおすすめです。</div>
-    <a class="aff-btn" id="aff-link" href="#" target="_blank" rel="sponsored nofollow noopener">
-      <span><span id="aff-city">東京</span>のホテルをAgodaで探す<small>実際の空室と価格を確認できます</small></span>
-      <span style="font-size:20px;">›</span>
-    </a>
-    <div class="aff-note">※上記はAgodaのアフィリエイト広告です。リンク経由で予約されると当サイトに報酬が入りますが、価格が上がることはありません。</div>
-  </div>
 
   <p class="team-link hidden" id="team-link-wrap"><a id="team-link" href="https://npb-magic.kkpwebninja.com/">順位・優勝マジックを見る</a></p>
 
@@ -450,7 +456,7 @@ const A8_AGODA = 'https://px.a8.net/svt/ejp?a8mat=4BCE3O+3O6AMA+4X1W+BW8O2&a8ejp
 // 試合日（?date=YYYY-MM-DD・日程ページから）があるときは、その日から泊数・人数を入れた検索ページへ。
 // 都市ページは日付を受け取らないため、検索ページを都市の番号で開く（番号は各都市ページのリンクから取得・2026-11-05 確認）
 const AGODA_CITY = {'sapporo-jp':3435,'sendai-jp':10345,'tokyo-jp':5085,'yokohama-jp':4590,'chiba-jp':5375,'saitama-jp':18827,'nagoya-jp':13740,'osaka-jp':9590,'hiroshima-jp':10554,'fukuoka-jp':16527};
-const TRIP_DATE = (()=>{const v=new URLSearchParams(location.search).get('date');if(!/^\d{4}-\d{2}-\d{2}$/.test(v||''))return null;
+let TRIP_DATE = (()=>{const v=new URLSearchParams(location.search).get('date');if(!/^\d{4}-\d{2}-\d{2}$/.test(v||''))return null;
   const d=new Date(v+'T00:00:00'),t=new Date();t.setHours(0,0,0,0);return isNaN(d)||d<t?null:v})();
 const agodaLinkFor = (slug,nights,people) => A8_AGODA + encodeURIComponent(TRIP_DATE&&nights&&AGODA_CITY[slug]
   ? `https://www.agoda.com/ja-jp/search?city=${AGODA_CITY[slug]}&checkIn=${TRIP_DATE}&los=${nights}&rooms=1&adults=${people||1}`
@@ -615,7 +621,7 @@ function fillVenues(keep){
 const gc=document.getElementById('genre-chips');
 GENRES.forEach(g=>{
   const b=document.createElement('button');b.className='chip'+(g.id===genre?' active':'');b.textContent=g.label;b.type='button';
-  b.onclick=()=>{genre=g.id;[...gc.children].forEach(c=>c.classList.remove('active'));b.classList.add('active');fillVenues();};
+  b.onclick=()=>{genre=g.id;[...gc.children].forEach(c=>c.classList.remove('active'));b.classList.add('active');fillVenues();clearDate();fillBaseball();};
   gc.appendChild(b);
 });
 fillVenues('l-kyocera');
@@ -631,6 +637,77 @@ fromSel.value='tokyo';
   // 行き先と同じ都市が出発地だと交通費0円になるので、その場合は出発地を東京か大阪に寄せる
   if(st && !from){ const a=AREA_KEY(st.area); if(a===AREA_KEY(fromSel.value)) fromSel.value=(a==='tokyo'?'osaka':'tokyo'); }
 })();
+
+// ── 2027年のプロ野球日程から会場と日付を入れる（98・113） ──
+// 日程は npb-magic の data/schedule_2027.json の写し（NPB公式 npb.jp/games/2027/ の日程。2026-11-11 時点）。r=予備日
+// 2027年の祝日（内閣府「国民の祝日」CSV・npb-magic で 2026-11-05 確認。3〜10月の分だけ）
+const HOL27={'2027-03-21':1,'2027-03-22':1,'2027-04-29':1,'2027-05-03':1,'2027-05-04':1,'2027-05-05':1,'2027-07-19':1,'2027-08-11':1,'2027-09-20':1,'2027-09-23':1,'2027-10-11':1};
+const NPB_HOME={'巨人':'tokyodome','阪神':'koshien','ヤクルト':'jingu','DeNA':'yokohama','広島':'mazda','中日':'vantelin','ソフトバンク':'paypay','楽天':'rakuten','オリックス':'kyocera','日本ハム':'escon','西武':'beluna','ロッテ':'zozo'};
+const NPB_FROM={'巨人':'tokyo','阪神':'osaka','ヤクルト':'tokyo','DeNA':'yokohama','広島':'hiroshima','中日':'nagoya','ソフトバンク':'fukuoka','楽天':'sendai','オリックス':'osaka','日本ハム':'sapporo','西武':'saitama','ロッテ':'chiba'};
+// 公式に本拠地以外の球場が書かれた試合は、このツールにある球場だけ使う（ほっと神戸・地方球場は除く）
+const NPB_VENUE={'京セラD大阪':'kyocera','東京ドーム':'tokyodome'};
+const gVenue=g=>g.p?NPB_VENUE[g.p]:NPB_HOME[g.h];
+const dJp=v=>{const d=new Date(v+'T00:00:00');return `${d.getMonth()+1}/${d.getDate()}（${'日月火水木金土'[d.getDay()]}${HOL27[v]?'・祝':''}）`};
+const stShort=id=>{const s=STADIUMS.find(x=>x.id===id);return s?s.name.replace(/（.*$/,''):''};
+let SCHED=null;
+function loadSched(){
+  if(SCHED)return Promise.resolve(SCHED);
+  return fetch('/data/schedule_2027.json').then(r=>r.json()).then(j=>{
+    const t=new Date();t.setHours(0,0,0,0);
+    SCHED=j.games.filter(g=>!g.r&&gVenue(g)&&new Date(g.d+'T00:00:00')>=t);return SCHED;});
+}
+function setDate(v){
+  TRIP_DATE=v;const el=document.getElementById('date-line');
+  if(!v){el.classList.add('hidden');el.textContent='';return;}
+  el.innerHTML=`試合日 ${dJp(v)}<button type="button" onclick="clearDate()">日付を外す</button>`;el.classList.remove('hidden');
+}
+function clearDate(){setDate(null);document.getElementById('bb-game').value='';}
+function pickGame(g,from){
+  toSel.value=gVenue(g);
+  if(from&&ORIGINS.includes(from))fromSel.value=from;
+  const a=AREA_KEY(STADIUMS.find(x=>x.id===toSel.value).area);
+  if(a===AREA_KEY(fromSel.value)&&!from)fromSel.value=(a==='tokyo'?'osaka':'tokyo');
+  setDate(g.d);
+}
+function fillBaseball(){
+  const box=document.getElementById('bb-pick');
+  if(genre!=='baseball'){box.classList.add('hidden');return;}
+  box.classList.remove('hidden');
+  loadSched().then(G=>{
+    const oc=document.getElementById('open-chips');
+    if(!oc.children.length){
+      G.filter(g=>g.d==='2027-03-26').forEach(g=>{
+        const b=document.createElement('button');b.type='button';b.className='chip';
+        b.setAttribute('aria-label',`3月26日 ${g.h}対${g.a}・${stShort(gVenue(g))}を行き先にする`);
+        b.onclick=()=>{pickGame(g);[...oc.children].forEach(c=>c.classList.toggle('active',c===b));gtag('event','ensei_pick',{type:'opening',venue:gVenue(g)});};
+        b.innerHTML=`${g.h}-${g.a}<small>${stShort(gVenue(g))}</small>`;
+        oc.appendChild(b);
+      });
+      if(!oc.children.length)oc.previousElementSibling.classList.add('hidden');
+      const ts=document.getElementById('bb-team');
+      Object.keys(NPB_HOME).forEach(k=>{const o=document.createElement('option');o.value=k;o.textContent=k;ts.appendChild(o);});
+    }
+  }).catch(()=>box.classList.add('hidden'));
+}
+document.getElementById('bb-team').onchange=e=>{
+  const team=e.target.value,gs=document.getElementById('bb-game');
+  if(!team){gs.classList.add('hidden');return;}
+  if(NPB_FROM[team])fromSel.value=NPB_FROM[team];
+  const list=SCHED.filter(g=>g.a===team);
+  gs.innerHTML=`<option value="">ビジター試合を選ぶ（${list.length}試合）</option>`;
+  let grp=null,m=0;
+  list.forEach((g,i)=>{const mm=+g.d.slice(5,7);if(mm!==m){m=mm;grp=document.createElement('optgroup');grp.label=mm+'月';gs.appendChild(grp);}
+    const o=document.createElement('option');o.value=i;o.textContent=`${dJp(g.d)} ${g.h}戦・${stShort(gVenue(g))}`;grp.appendChild(o);});
+  gs._list=list;gs.classList.remove('hidden');
+  gtag('event','ensei_pick',{type:'team',team:team});
+};
+document.getElementById('bb-game').onchange=e=>{
+  const g=e.target._list&&e.target._list[e.target.value];if(!g){setDate(null);return;}
+  pickGame(g,NPB_FROM[document.getElementById('bb-team').value]);
+};
+toSel.addEventListener('change',()=>{clearDate();[...document.getElementById('open-chips').children].forEach(c=>c.classList.remove('active'));});
+fillBaseball();
+if(TRIP_DATE)setDate(TRIP_DATE);
 
 let sel={trans:'shinkansen',nights:1,people:1,hotel:'biz'};
 function bindChips(id,key,isNum){
@@ -692,7 +769,7 @@ function calc(){
   document.getElementById('r-trans').textContent=fmt(transTotal)+'円';
   document.getElementById('r-trans-sub').textContent=transSub+(sel.people>1?` × ${sel.people}人`:'');
   document.getElementById('r-hotel').textContent=sel.nights?fmt(hotelTotal)+'円':'なし';
-  document.getElementById('r-hotel-sub').textContent=sel.nights?`${area.name}の相場 約${fmt(hotelOne)}円/泊 × ${sel.nights}泊${sel.people>1?' × '+sel.people+'人（相部屋想定で約7割）':''}`:'日帰りのため宿泊なし';
+  document.getElementById('r-hotel-sub').textContent=sel.nights?`${area.name}の相場 約${fmt(hotelOne)}円/泊 × ${sel.nights}泊${sel.people>1?' × '+sel.people+'人（相部屋想定で約7割）':''}`+(busyNight()?'。金・土・祝日の前の夜は、この目安より高くなりやすい日です':''):'日帰りのため宿泊なし';
   document.getElementById('r-local').textContent=localTotal?fmt(localTotal)+'円':'徒歩圏';
   document.getElementById('r-local-sub').textContent=st.localSub;
 
@@ -723,14 +800,10 @@ function calc(){
   }else{ tw.classList.add('hidden'); }
 
   // Agoda
-  document.getElementById('aff-city').textContent=area.name;
   const agodaUrl=agodaLinkFor(area.agoda,sel.nights,sel.people);
-  ['aff-link','hero-cta','bd-link'].forEach(id=>{const el=document.getElementById(id);el.href=agodaUrl;el.onclick=()=>gtag('event','ensei_cta',{choice:'hotel',from:id,city:area.name});});
+  ['hero-cta'].forEach(id=>{const el=document.getElementById(id);el.href=agodaUrl;el.onclick=()=>gtag('event','ensei_cta',{choice:'hotel',from:id,city:area.name});});
   document.getElementById('hero-cta-city').textContent=area.name;
   document.getElementById('hero-cta').style.display=sel.nights?'block':'none';
-  document.getElementById('aff-desc').textContent=sel.nights
-    ?(TRIP_DATE?`${tripDateJp()}から${sel.nights}泊の${area.name}の宿を、日付を入れた状態で探せます。`:'')+`${area.name}のビジネスホテルは約${fmt(area.hotel.biz)}円が目安。公演日・試合日は会場周辺から埋まるので、早めに実際の価格をチェックしておきましょう。`
-    :`日帰りでも終演後に泊まると翌日ゆっくり観光できます。${area.name}の実際のホテル価格をチェックしてみましょう。`;
 
   if(!window.__adPushed){window.__adPushed=true;try{(adsbygoogle=window.adsbygoogle||[]).push({});}catch(e){}}
   gtag('event','ensei_calc',{from:AREAS[fromKey].name,to:st.name,genre:genre,nights:sel.nights,people:sel.people,trans:transUsed,total:total});
@@ -739,6 +812,12 @@ function calc(){
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
+// 泊まる夜（試合日の夜）が金・土・祝日の前の日か
+function busyNight(){
+  if(!TRIP_DATE)return false;const d=new Date(TRIP_DATE+'T00:00:00'),n=new Date(d);n.setDate(d.getDate()+1);
+  const nk=`${n.getFullYear()}-${String(n.getMonth()+1).padStart(2,'0')}-${String(n.getDate()).padStart(2,'0')}`;
+  return d.getDay()===5||d.getDay()===6||!!HOL27[nk];
+}
 function back(){
   document.getElementById('page-result').classList.add('hidden');
   document.getElementById('page-input').classList.remove('hidden');
