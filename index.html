@@ -650,6 +650,9 @@ const gVenue=g=>g.p?NPB_VENUE[g.p]:NPB_HOME[g.h];
 const dJp=v=>{const d=new Date(v+'T00:00:00');return `${d.getMonth()+1}/${d.getDate()}（${'日月火水木金土'[d.getDay()]}${HOL27[v]?'・祝':''}）`};
 const stShort=id=>{const s=STADIUMS.find(x=>x.id===id);return s?s.name.replace(/（.*$/,''):''};
 let SCHED=null;
+// 本拠地以外の球場での主催試合（例: 阪神主催の京セラドーム）は、表示と日程リンクを主催球団にする
+let TRIP_HOST=null;
+const hostStadium=st=>{if(!TRIP_HOST||!st.team)return st;const h=STADIUMS.find(x=>x.id===NPB_HOME[TRIP_HOST]);return h&&h.team!==st.team?{...st,name:st.name.replace(/（.*）$/,'（'+TRIP_HOST+'主催）'),team:h.team,hostName:h.name.replace(/^.*（(.+)）$/,'$1')}:st};
 function loadSched(){
   if(SCHED)return Promise.resolve(SCHED);
   return fetch('/data/schedule_2027.json').then(r=>r.json()).then(j=>{
@@ -657,7 +660,7 @@ function loadSched(){
     SCHED=j.games.filter(g=>!g.r&&gVenue(g)&&new Date(g.d+'T00:00:00')>=t);return SCHED;});
 }
 function setDate(v){
-  TRIP_DATE=v;const el=document.getElementById('date-line');
+  TRIP_DATE=v;if(!v)TRIP_HOST=null;const el=document.getElementById('date-line');
   if(!v){el.classList.add('hidden');el.textContent='';return;}
   el.innerHTML=`試合日 ${dJp(v)}<button type="button" onclick="clearDate()">日付を外す</button>`;el.classList.remove('hidden');
 }
@@ -667,7 +670,7 @@ function pickGame(g,from){
   if(from&&ORIGINS.includes(from))fromSel.value=from;
   const a=AREA_KEY(STADIUMS.find(x=>x.id===toSel.value).area);
   if(a===AREA_KEY(fromSel.value)&&!from)fromSel.value=(a==='tokyo'?'osaka':'tokyo');
-  setDate(g.d);
+  setDate(g.d);TRIP_HOST=g.p?g.h:null;
 }
 function fillBaseball(){
   const box=document.getElementById('bb-pick');
@@ -733,7 +736,7 @@ let last=null;
 // ── 計算 ──────────────────────────────────────
 function calc(){
   const fromKey=fromSel.value;
-  const st=STADIUMS.find(s=>s.id===toSel.value);
+  const st=hostStadium(STADIUMS.find(s=>s.id===toSel.value));
   const fare=getFare(fromKey,st.area);
   const area=AREAS[st.area];
 
@@ -794,7 +797,7 @@ function calc(){
   if(st.team){
     // 2027年の日程が出たので、球団別の日程カレンダーへ（2026-11-05。順位は日程ページから球団ページへ行ける）
     tl.href='https://npb-magic.kkpwebninja.com/schedule/?team='+st.team;
-    tl.textContent=st.name.replace(/^.*（(.+)）$/,'$1')+'の2027年の日程（どの日にどこと試合があるか）を見る';
+    tl.textContent=(st.hostName||st.name.replace(/^.*（(.+)）$/,'$1'))+'の2027年の日程（どの日にどこと試合があるか）を見る';
     tl.onclick=()=>gtag('event','xlink_npb_magic',{team:st.team});
     tw.classList.remove('hidden');
   }else{ tw.classList.add('hidden'); }
