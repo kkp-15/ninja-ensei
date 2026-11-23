@@ -335,6 +335,8 @@ body.k-page{background:var(--k-surface) url(/kit/img/d4-washi.webp) 0 0/320px au
        特定の球団・会場に見えない絵。結果が出たときだけ見える（#page-result の中） -->
   <img class="trip-pic" src="/img/shiba-trip.webp" width="360" height="355" alt="柴犬の忍者" loading="lazy" decoding="async">
 
+  <!-- 2026-11-23 泊まりの遠征なら、荷物（スーツケース）を借りるか買うかへ泊数を渡す -->
+  <p class="team-link hidden" id="rb-link-wrap"><a id="rb-link" href="https://rentbuy.kkpwebninja.com/">スーツケースは借りる？買う？（泊数を入れて比べる）</a></p>
   <p class="team-link hidden" id="team-link-wrap"><a id="team-link" href="https://npb-magic.kkpwebninja.com/">順位・優勝マジックを見る</a></p>
 
   <div class="breakdown">
@@ -837,6 +839,11 @@ function calc(){
     tl.onclick=()=>gtag('event','xlink_npb_magic',{team:st.team});
     tw.classList.remove('hidden');
   }else{ tw.classList.add('hidden'); }
+
+  // 泊まりなら、借りる？買う？（スーツケース）へ泊数を渡す（2026-11-23）
+  const rw=document.getElementById('rb-link-wrap'), rl=document.getElementById('rb-link');
+  if(sel.nights>0){ rl.href='https://rentbuy.kkpwebninja.com/?nights='+Math.min(30,Math.max(1,sel.nights)); rl.onclick=()=>gtag('event','xlink_rentbuy',{from:'ensei'}); rw.classList.remove('hidden'); }
+  else rw.classList.add('hidden');
 
   // Agoda
   const agodaUrl=agodaLinkFor(area.agoda,sel.nights,sel.people);
