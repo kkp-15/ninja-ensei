@@ -36,9 +36,9 @@
 
 /* ---------- ボタン（主＝木札／副／小／大） ---------- */
 .k-btn{display:inline-flex;align-items:center;justify-content:center;font-family:var(--k-bold);font-weight:400;letter-spacing:.04em;line-height:1.2;font-feature-settings:"palt" 1;text-decoration:none;cursor:pointer;transition:transform .08s,box-shadow .08s,filter .08s,background .15s;-webkit-tap-highlight-color:transparent}
-/* 主ボタン: 2026-11-09 ユーザー承認で全サイト「平らなオレンジ＋墨の枠」に統一（木目の板はやめた。10/30の配色調査・ワードウルフ等5サイトの試しを kit に取り込み）。色は --k-btn-main（既定 #f26a1b） */
+/* 主ボタン: 2026-11-24 文字を17→19pxに（白×#f26a1b は 3.06:1。WCAG/HIG の大きな太字＝3:1 を満たすため・ユーザー承認A）。2026-11-09 ユーザー承認で全サイト「平らなオレンジ＋墨の枠」に統一（木目の板はやめた。10/30の配色調査・ワードウルフ等5サイトの試しを kit に取り込み）。色は --k-btn-main（既定 #f26a1b） */
 :root{--k-btn-main:#f26a1b;--k-navy:#2b3768}
-.k-btn-main{position:relative;min-height:56px;padding:0 22px;border:3px solid var(--k-sumi);border-radius:14px;background:var(--k-btn-main);color:#fff;font-size:17px;text-shadow:0 1px 0 var(--k-sumi),1px 0 0 var(--k-sumi),0 -1px 0 var(--k-sumi),-1px 0 0 var(--k-sumi);filter:drop-shadow(4px 4px 0 var(--k-sumi));white-space:nowrap}
+.k-btn-main{position:relative;min-height:56px;padding:0 22px;border:3px solid var(--k-sumi);border-radius:14px;background:var(--k-btn-main);color:#fff;font-size:19px;text-shadow:0 1px 0 var(--k-sumi),1px 0 0 var(--k-sumi),0 -1px 0 var(--k-sumi),-1px 0 0 var(--k-sumi);filter:drop-shadow(4px 4px 0 var(--k-sumi));white-space:nowrap}
 .k-btn-main:hover,.k-btn-main:disabled,.k-btn-main[disabled]{background:var(--k-btn-main)}
 .k-btn-main::after{content:"";position:absolute;inset:0;border-radius:11px;pointer-events:none;background:linear-gradient(110deg,transparent 38%,rgba(255,255,255,.45) 50%,transparent 62%) no-repeat;background-size:260% 100%;background-position:120% 0;transition:background-position .7s ease}
 .k-btn-main:hover::after,.k-btn-main:focus-visible::after{background-position:-20% 0}
@@ -768,3 +768,19 @@ body.k-view-ov.k-idle .k-ov{visibility:hidden}   /* 待ち画面の間は中身�
 .k-talk.a>p::before{left:auto;right:-9px;border:0;border-right:2px solid #efc98a;border-top:2px solid #efc98a}
 @media(max-width:420px){.k-talk>img{width:52px;height:52px}}
 @media print{.k-talks{display:none}}
+
+/* ===== アプリのような操作感（2026-11-23）=====
+   スマホで「Webページを触っている感じ」を減らす小さな決まり。見た目は変えない。
+   1) 入力欄を押しても画面が勝手に拡大しない（iOS は 16px 未満の入力欄で拡大する）
+   2) ボタンのダブルタップ拡大の待ちをなくし、押した瞬間に反応する
+   3) ボタンを長押ししても文字選択やメニューが出ない
+   4) 同じサイト内のページ移動をふわっと切り替える（対応ブラウザだけ。動きを減らす設定の人には出さない） */
+@media (pointer:coarse){
+  input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=color]),select,textarea{font-size:16px!important}
+}
+a,button,summary,label,select,[role=button],input[type=checkbox],input[type=radio]{touch-action:manipulation}
+button,[role=button],.k-btn{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+@media (prefers-reduced-motion:no-preference){
+  @view-transition{navigation:auto}
+  ::view-transition-old(root),::view-transition-new(root){animation-duration:.18s}
+}
