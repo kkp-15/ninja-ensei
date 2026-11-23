@@ -301,7 +301,7 @@ body.k-page{background:var(--k-surface) url(/kit/img/d4-washi.webp) 0 0/320px au
     <div class="total-label" id="r-cond">1泊2日・1人・新幹線</div>
     <div class="total"><span id="r-total">0</span><small>円</small></div>
     <div class="per" id="r-per">1人あたり 約0円</div>
-    <a class="hero-cta" id="hero-cta" href="#" target="_blank" rel="sponsored nofollow noopener"><span class="pr-badge">PR</span><span id="hero-cta-city">大阪</span>のホテルの実際の価格を見る ›</a>
+    <a class="hero-cta" id="hero-cta" href="#" target="_blank" rel="sponsored nofollow noopener"><span class="pr-badge">PR</span><span id="hero-cta-city">大阪</span><span id="hero-cta-tail">のホテルの実際の価格を見る</span> ›</a>
   </div>
 
   <div class="breakdown">
@@ -311,7 +311,7 @@ body.k-page{background:var(--k-surface) url(/kit/img/d4-washi.webp) 0 0/320px au
       <div class="bd-val" id="r-trans"></div>
     </div>
     <div class="bd-row">
-      <div><div class="bd-name">ホテル代</div><div class="bd-sub" id="r-hotel-sub"></div></div>
+      <div><div class="bd-name">ホテル代</div><div class="bd-sub" id="r-hotel-sub"></div><a class="bd-link" id="bd-link" href="#" target="_blank" rel="sponsored nofollow noopener">［PR］<span id="bd-link-city">東京</span>の宿の空きと実際の価格を見る</a></div>
       <div class="bd-val" id="r-hotel"></div>
     </div>
     <div class="bd-row">
@@ -817,9 +817,13 @@ function calc(){
 
   // Agoda
   const agodaUrl=agodaLinkFor(area.agoda,sel.nights,sel.people);
-  ['hero-cta'].forEach(id=>{const el=document.getElementById(id);el.href=agodaUrl;el.onclick=()=>gtag('event','ensei_cta',{choice:'hotel',from:id,city:area.name});});
-  document.getElementById('hero-cta-city').textContent=area.name;
+  ['hero-cta','bd-link'].forEach(id=>{const el=document.getElementById(id);el.href=agodaUrl;el.onclick=()=>gtag('event','ensei_cta',{choice:'hotel',from:id,city:area.name});});
+  // 試合日を選んでいれば、その日に泊まれる宿だと分かる言い方に（2026-11-23）
+  document.getElementById('hero-cta-city').textContent=(TRIP_DATE?tripDateJp()+'に泊まれる':'')+area.name;
+  document.getElementById('bd-link-city').textContent=area.name;
+  document.getElementById('hero-cta-tail').textContent=TRIP_DATE?'のホテルの空きを見る':'のホテルの実際の価格を見る';
   document.getElementById('hero-cta').style.display=sel.nights?'block':'none';
+  document.getElementById('bd-link').style.display=sel.nights?'inline-block':'none';
 
   if(!window.__adPushed){window.__adPushed=true;try{(adsbygoogle=window.adsbygoogle||[]).push({});}catch(e){}}
   gtag('event','ensei_calc',{from:AREAS[fromKey].name,to:st.name,genre:genre,nights:sel.nights,people:sel.people,trans:transUsed,total:total});
