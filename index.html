@@ -55,6 +55,7 @@ body{font-family:"M PLUS Rounded 1c","Hiragino Maru Gothic ProN","Hiragino Sans"
 .sel{width:100%;border:1px solid #bbb;border-radius:6px;padding:11px 32px 11px 12px;font-size:16px;font-weight:700;font-family:inherit;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23bd5410' stroke-width='2' fill='none'/%3E%3C/svg%3E") no-repeat right 12px center;color:var(--dark);outline:none;appearance:none;-webkit-appearance:none;}
 .sel:focus{border-color:var(--orange);}
 .chip-row{display:flex;flex-wrap:wrap;gap:6px;}
+.quick{border:2px solid var(--orange);border-radius:6px;padding:12px;margin:4px 0 12px;background:#fff8ef;}.quick-h{font-weight:800;font-size:16px;margin:0 0 8px;}.quick-note{font-size:13px;color:#555;margin:8px 0 0;}
 .chip{border:1px solid #bbb;border-radius:6px;padding:8px 12px;font-size:14px;font-weight:700;cursor:pointer;background:#fff;color:var(--dark);font-family:inherit;min-height:40px;line-height:1.4;}
 .chip.active{border-color:var(--orange-dark);background:var(--orange-light);color:var(--orange-dark);}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
@@ -229,6 +230,13 @@ body.k-page{background:var(--k-surface) url(/kit/img/d4-washi.webp) 0 0/320px au
 
 <!-- ===== INPUT ===== -->
 <div class="wrap" id="page-input">
+
+  <!-- 2026-11-23 他ページから行き先つきで来た人は、出発地をひと押しで答えが出る（知りたい金額→その流れで宿へ） -->
+  <div class="quick hidden" id="quick">
+    <p class="quick-h"><span id="quick-to">東京ドーム</span>まで、どこから行きますか？</p>
+    <div class="chip-row" id="quick-chips"></div>
+    <p class="quick-note">押すとすぐ金額が出ます（1泊・1人・新幹線。あとで変えられます）</p>
+  </div>
 
   <div class="card">
     <div class="card-label"><span class="step">1</span>出発地</div>
@@ -648,7 +656,20 @@ fromSel.value='tokyo';
   if(gg){ genre=gg; [...gc.children].forEach((c,i)=>c.classList.toggle('active',GENRES[i].id===gg)); fillVenues(st?st.id:null); }
   if(from && ORIGINS.includes(from)) fromSel.value=from;
   // 行き先と同じ都市が出発地だと交通費0円になるので、その場合は出発地を東京か大阪に寄せる
+  let saved=null;try{saved=localStorage.getItem('ensei_from');}catch(e){}
+  if(!from && saved && ORIGINS.includes(saved)) fromSel.value=saved;
   if(st && !from){ const a=AREA_KEY(st.area); if(a===AREA_KEY(fromSel.value)) fromSel.value=(a==='tokyo'?'osaka':'tokyo'); }
+  window.__landing = st ? ((from && ORIGINS.includes(from)) || (saved && ORIGINS.includes(saved) && AREA_KEY(saved)!==AREA_KEY(st.area)) ? 'auto' : 'quick') : null;
+  if(window.__landing==='quick'){
+    document.getElementById('quick-to').textContent=st.name.replace(/（.*$/,'');
+    const qc=document.getElementById('quick-chips');
+    ORIGINS.filter(k=>AREA_KEY(k)!==AREA_KEY(st.area)).forEach(k=>{
+      const b=document.createElement('button');b.type='button';b.className='chip';b.textContent=AREAS[k].name;
+      b.onclick=()=>{fromSel.value=k;window.__via='quick';calc();};
+      qc.appendChild(b);
+    });
+    document.getElementById('quick').classList.remove('hidden');
+  }
 })();
 
 // ── 2027年のプロ野球日程から会場と日付を入れる（98・113） ──
@@ -739,6 +760,8 @@ bindChips('trans-chips','trans',false);
 bindChips('nights-chips','nights',true);
 bindChips('people-chips','people',true);
 bindChips('hotel-chips','hotel',false);
+// 行き先と出発地が分かっている着地は、入力を飛ばして答えから見せる（2026-11-23）
+if(window.__landing==='auto')setTimeout(()=>{window.__via='auto';calc();},0);
 
 const fmt=n=>Math.round(n).toLocaleString('ja-JP');
 const fmtMin=m=>m>=60?`${Math.floor(m/60)}時間${m%60?m%60+'分':''}`:`${m}分`;
@@ -826,7 +849,8 @@ function calc(){
   document.getElementById('bd-link').style.display=sel.nights?'inline-block':'none';
 
   if(!window.__adPushed){window.__adPushed=true;try{(adsbygoogle=window.adsbygoogle||[]).push({});}catch(e){}}
-  gtag('event','ensei_calc',{from:AREAS[fromKey].name,to:st.name,genre:genre,nights:sel.nights,people:sel.people,trans:transUsed,total:total});
+  try{localStorage.setItem('ensei_from',fromKey);}catch(e){}
+  gtag('event','ensei_calc',{via:window.__via||'form',from:AREAS[fromKey].name,to:st.name,genre:genre,nights:sel.nights,people:sel.people,trans:transUsed,total:total});
   document.getElementById('page-input').classList.add('hidden');
   document.getElementById('page-result').classList.remove('hidden');
   window.scrollTo({top:0,behavior:'smooth'});
