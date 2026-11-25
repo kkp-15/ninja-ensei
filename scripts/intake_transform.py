@@ -9,12 +9,17 @@ s=s.replace('https://kkpwebninja.com/ensei/',BASE)
 s=s.replace('"author": {"@type": "Person", "name": "KKP", "url": "https://kkpwebninja.com/"}','"author": {"@type": "Organization", "name": "web忍者の砦", "url": "https://kkpwebninja.com/"}')
 s=s.replace('<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;800;900&display=swap" rel="stylesheet">',
 '''<!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-2LM85GJN0L"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-2LM85GJN0L');
+  // 本番ドメインだけで計測する（*.pages.dev に来るボットの0秒訪問で数字が崩れていたため）
+  if (/(^|\\.)kkpwebninja\\.com$/.test(location.hostname)) {
+    var gs = document.createElement('script'); gs.async = true;
+    gs.src = 'https://www.googletagmanager.com/gtag/js?id=G-2LM85GJN0L';
+    document.head.appendChild(gs);
+    gtag('js', new Date());
+    gtag('config', 'G-2LM85GJN0L');
+  }
 </script>
 <!-- AdSense -->
 <script async data-overlays="bottom" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1298304917726270" crossorigin="anonymous"></script>''')
